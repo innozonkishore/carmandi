@@ -1,0 +1,85 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+leftbar_home:
+  name: leftbar_home
+  ad_id: 1
+  
+leftbar_new_car:
+  name: leftbar_new_car
+  ad_id: 2
+  
+leftbar_private_sales:
+  name: leftbar_private_sales
+  ad_id: NULL
+  
+leftbar_clearance_center:
+  name: leftbar_clearance_center
+  ad_id: 3
+  
+rightbar_home:
+  name: rightbar_home
+  ad_id: 1
+
+rightbar_new_car:
+  name: rightbar_new_car
+  ad_id: 2
+
+rightbar_private_sales:
+  name: rightbar_private_sales
+  ad_id: NULL
+  
+rightbar_clearance_center:
+  name: rightbar_clearance_center
+  ad_id: 3
+  
+bottom_row_left_home:
+  name: bottom_row_left_home
+  ad_id: 1
+
+bottom_row_left_new_car:
+  name: bottom_row_left_new_car
+  ad_id: 2
+  
+bottom_row_left_clearance_center:
+  name: bottom_row_left_clearance_center
+  ad_id: 3
+
+bottom_row_left_private_sales:
+  name: bottom_row_left_private_sales
+  ad_id: NULL
+
+bottom_row_middle_home:
+  name: bottom_row_middle_home
+  ad_id: 1
+
+bottom_row_middle_new_car:
+  name: bottom_row_middle_new_car
+  ad_id: 2
+
+bottom_row_middle_private_sales:
+  name: bottom_row_middle_private_sales
+  ad_id: NULL
+  
+bottom_row_middle_clearance_center:
+  name: bottom_row_middle_clearance_center
+  ad_id: 3
+    
+bottom_row_right_home:
+  name: bottom_row_right_home
+  ad_id: 1
+
+bottom_row_right_new_car:
+  name: bottom_row_right_new_car
+  ad_id: 2
+
+bottom_row_right_private_sales:
+  name: bottom_row_right_private_sales
+  ad_id: NULL
+  
+bottom_row_right_clearance_center:
+  name: bottom_row_right_clearance_center
+  ad_id: 3
+      
+center_home:
+  name: center_home
+  ad_id: 1

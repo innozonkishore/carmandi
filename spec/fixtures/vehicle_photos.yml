@@ -1,0 +1,31 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+main_vehicle_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb.gif
+  thumbnail: null
+  size: 3597
+  width: 130
+  height: 80
+  parent_id: NULL
+  vehicle: vehicle1
+  
+thumb_vehicle_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb_thumb.gif
+  thumbnail: thumb
+  size: 1597
+  width: 100
+  height: 50
+  parent: main_vehicle_image
+  vehicle_id: NULL
+    
+large_vehicle_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb_large.gif
+  thumbnail: large
+  size: 1597
+  width: 100
+  height: 50
+  parent: main_vehicle_image
+  vehicle_id: NULL

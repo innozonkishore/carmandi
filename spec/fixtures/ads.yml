@@ -1,0 +1,26 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+code_ad:
+  id: 1
+  ad_name: 'code ad'
+  advertiser_name: 'Honda'
+  phone_number: '123567890'
+  email: 'abcd@gmail.com'
+  ad_type: 'Code'
+  
+image_ad:
+  id: 2
+  ad_name: 'image ad'
+  advertiser_name: 'Maruti'
+  phone_number: '123567890'
+  email: 'abcd@gmail.com'
+  ad_type: 'Image'
+  
+image_ad_no_url:
+  id: 3
+  ad_name: 'image ad'
+  advertiser_name: 'Maruti'
+  phone_number: '123567890'
+  email: 'abcd@gmail.com'
+  ad_type: 'Image'
+  url: ''

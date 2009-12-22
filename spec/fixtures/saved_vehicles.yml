@@ -1,0 +1,6 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: buyer
+  resource_id: vehicle1.id
+  resource_type: Vehicle

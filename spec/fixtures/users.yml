@@ -1,0 +1,59 @@
+admin:
+  firstname: admin
+  lastname: kucchbhi
+  email: dealer1@gmail.com
+  role: admin
+  crypted_password: "<%= User.password_digest('dealer1','salt') %>"
+  salt: salt
+  remember_token: NULL
+  remember_token_expires_at: NULL
+  reset_code: NULL
+  address: mera bharat mahaan
+  phone_number: 1234567890
+  username: admin
+  zipcode: '94106'
+
+dealer:
+  firstname: dealer1
+  lastname: kucchbhi
+  email: dealer1@gmail.com
+  role: dealer
+  crypted_password: "User.password_digest('dealer1','salt')"
+  salt: salt
+  remember_token: NULL
+  remember_token_expires_at: NULL
+  reset_code: NULL
+  address: mera bharat mahaan
+  phone_number: 1234567890
+  username: dealer1
+  zipcode: '94106'
+  
+representative:
+  firstname: representative
+  lastname: kucchbhi
+  email: dealer1@gmail.com
+  role: representative
+  crypted_password: "29fc226130b6576f415e0a58fe9653fe7c1ece13"
+  salt: salt
+  remember_token: NULL
+  remember_token_expires_at: NULL
+  reset_code: NULL
+  address: mera bharat mahaan
+  phone_number: 1234567890
+  username: representative
+  zipcode: '94106'
+  
+buyer:
+  firstname: buyer
+  lastname: kucchbhi
+  email: dealer1@gmail.com
+  role: buyer
+  crypted_password: "29fc226130b6576f415e0a58fe9653fe7c1ece13"
+  salt: salt
+  remember_token: NULL
+  remember_token_expires_at: NULL
+  reset_code: NULL
+  address: mera bharat mahaan
+  phone_number: 1234567890
+  username: buyer
+  zipcode: '94106'

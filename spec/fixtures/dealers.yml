@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+dealer1:
+  dealership_name: my first dealer
+  city: kryptocrat
+  province: krypton
+  phone_number: '0000000'
+  address: superman ka ghar hai bhai
+  postal_code: '0101010'
+  upload_limit: 100
+  user: dealer

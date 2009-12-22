@@ -1,0 +1,26 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+vehicle1:
+  status: active
+  vin: '1HDLJOIE4743JGHD'
+  fuel: Diesel
+  body_styles: COUPE 2-DR
+  vin_data: NULL
+  dealer_comment: NULL
+  clearance_center: false
+  mileage: 18
+  price: 25000
+  dealer: dealer1
+  vehicle_make_id: 1
+  vehicle_model_id: 1
+  category: general
+  vehicle_trim_type_id: NULL
+  trim: Coupe
+  model_year: 2004
+  lat: 45.3753
+  lng: -75.6911
+  zipcode: K1A0B1
+  standard_features: Power Door Locks;Vehicle Anti-Theft;ABS Brakes;Limited Slip Differential
+  optional_features: Subwoofer;Navigation Aid
+  other_features: Cargo Volume:12.30 cu.ft.;Fuel Economy-city:14 miles/gallon
+  stock_number: 1

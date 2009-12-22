@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+main_image:
+  id: 1
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb.gif
+  thumbnail: null
+  size: 3597
+  width: 130
+  height: 80
+  parent_id: 1
+  ad_id: 2
+  
+second_image:
+  id: 2
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb.gif
+  thumbnail: null
+  size: 3597
+  width: 130
+  height: 80
+  parent_id: 1
+  ad_id: 3

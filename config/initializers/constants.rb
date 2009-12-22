@@ -1,0 +1,7 @@
+VEHICLE_PHOTOS_LIMIT = 21
+VEHICLE_PHOTOS_SIZE_LIMIT = 10
+CONSTANT_FEATURES = ["VINquery_Vehicle_ID", "Exterior Color", "Interior Trim", "Model Year", "Make", "Model", "Trim Level", "Body Style", "Engine Type", "Transmission-long"]
+PER_PAGE = 10
+VEHICLE_OPTIONS = ["Air Conditioning", "Alarm", "All equipped", "Alloy wheels", "AM/FM stereo", "Anti-lock brakes", "Anti-starter", "Anti-theft", "Bench seat", "Bucket seats", "Cassette", "CD player", "Cruise control", "Driver air bag", "Dual air bag", "Fog lights", "Heated mirrors", "Heated seats", "Hubcaps", "Intermittent wipers", "Keyless entry", "Leather interior", "Lift out roof", "Navigation system", "Power brakes", "Power Hatch", "Power locks", "Power mirrors", "Power Package", "Power seat", "Power steering", "Power windows", "Rear defroster", "Remote start", "Removable Panels", "Removable Roof Panel", "Removeable Roof", "Roof rack", "Side impact air bag", "Spoiler", "Sunroof", "Tilt steering", "Tilt Wheel", "Tinted glass", "Tow package", "Traction control", "T-top"]
+LANGUAGES = { "Select language" => "", "English" => "english", "Hindi" => "hindi", "Punjabi" => "punjabi", "Urdu" => "urdu" }
+FIVE_AD_LOCATIONS = ["leftbar", "rightbar", "bottom_row_left", "bottom_row_middle", "bottom_row_right"]

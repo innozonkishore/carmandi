@@ -1,0 +1,100 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+main_listing_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb.gif
+  thumbnail: null
+  size: 3597
+  width: 130
+  height: 80
+  parent_id: NULL
+  attachable_id: 2
+  attachable_type: Listing
+  
+thumb_listing_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb_thumb.gif
+  thumbnail: thumb
+  size: 1597
+  width: 100
+  height: 50
+  parent: main_listing_image
+  attachable_id: NULL
+  attachable_type: NULL
+    
+large_listing_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb_large.gif
+  thumbnail: large
+  size: 1597
+  width: 100
+  height: 50
+  parent: main_listing_image
+  attachable_id: NULL
+  attachable_type: NULL
+  
+main_pv_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb.gif
+  thumbnail: null
+  size: 3597
+  width: 130
+  height: 80
+  parent_id: NULL
+  attachable_id: 1
+  attachable_type: PrivateVehicle
+
+thumb_pv_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb_thumb.gif
+  thumbnail: thumb
+  size: 1597
+  width: 100
+  height: 50
+  parent: main_pv_image
+  attachable_id: NULL
+  attachable_type: NULL
+
+large_pv_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb_large.gif
+  thumbnail: large
+  size: 1597
+  width: 100
+  height: 50
+  parent: main_pv_image
+  attachable_id: NULL
+  attachable_type: NULL
+  
+main_uv_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb.gif
+  thumbnail: null
+  size: 3597
+  width: 130
+  height: 80
+  parent_id: NULL
+  attachable_id: 1
+  attachable_type: UnsupportedVehicle
+
+thumb_uv_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb_thumb.gif
+  thumbnail: thumb
+  size: 1597
+  width: 100
+  height: 50
+  parent: main_uv_image
+  attachable_id: NULL
+  attachable_type: NULL
+
+large_uv_image:
+  content_type: image/gif
+  filename: 130x80_hdfc_20feb_large.gif
+  thumbnail: large
+  size: 1597
+  width: 100
+  height: 50
+  parent: main_uv_image
+  attachable_id: NULL
+  attachable_type: NULL

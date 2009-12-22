@@ -1,0 +1,35 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+useful_link:
+  name_english: useful_active
+  name_hindi: useful_active
+  name_urdu: useful_active
+  name_punjabi: useful_active
+  useful: true
+  position: 0
+  
+useful_link2:
+  name_english: useful_inactive
+  name_hindi: useful_inactive
+  name_urdu: useful_inactive
+  name_punjabi: useful_inactive
+  useful: true
+  position: 1
+  status: inactive
+  
+important_link:
+  name_english: important_active
+  name_hindi: important_active
+  name_urdu: important_active
+  name_punjabi: important_active
+  useful: false
+  position: 0
+  
+important_link2:
+  name_english: important_inactive
+  name_hindi: important_inactive
+  name_urdu: important_inactive
+  name_punjabi: important_inactive
+  useful: false
+  position: 1
+  status: inactive

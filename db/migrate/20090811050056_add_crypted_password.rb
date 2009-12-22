@@ -1,0 +1,15 @@
+class AddCryptedPassword < ActiveRecord::Migration
+  def self.up
+    add_column :users, :crypted_password, :string
+    add_column :users, :salt, :string
+    add_column :users, :remember_token, :string
+    add_column :users, :remember_token_expires_at, :timestamp
+  end
+
+  def self.down
+    remove_column :users, :crypted_password
+    remove_column :users, :salt
+    remove_column :users, :remember_token
+    remove_column :users, :remember_token_expires_at
+  end
+end

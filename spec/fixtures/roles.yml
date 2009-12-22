@@ -1,0 +1,14 @@
+admin:
+  name: SWA
+  
+representative:
+  name: representative
+  
+dealer:
+  name: Dealer
+  
+private_seller:
+  name: Private seller
+  
+buyer:
+  name: Buyer

@@ -1,0 +1,11 @@
+/* Stylesheet for IE
+   Created: Friday August 7, 2009 @ 10:30am
+   Updated: Friday August 7, 2009 @ 10:30am
+   Author: Vijayta Panchal
+*/
+.button .submit{ padding: 4px 19px 7px 0; }
+.subNav { margin-top: -5px; }
+.navigation ul li  { margin-right: 5px !important; padding-right: 1px; }
+.navigation ul li span { padding-right: 3px !important; position: relative; }
+.navigation ul li span a{ background-position: top right !important; margin-right: -4px !important; position: relative; right: -4px; }
+.navigation { width: 565px;}
