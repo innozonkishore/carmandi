@@ -1,0 +1,37 @@
+<% if @searched_vehicles.empty? %>
+	<%= t(:no_vehicle_found) %>
+<% else %>
+<div class="buttonBar">
+	<%= button_to t(:Refine_Search), search_private_vehicles_path, :class => "simpleBotton", :method => :get %>
+</div>
+
+<% for vehicle in @searched_vehicles -%>
+<div class="searchResult">
+	<div class="resultHead">
+		<% detail_link = vehicle.try(:model_year).to_s + " " + vehicle.vehicle_make.name + " " + vehicle.try(:vehicle_model).to_s + " " + vehicle.try(:trim).to_s %>
+		<div class="carName"><%= link_to detail_link, private_vehicle_path(vehicle) %></div>
+		<div class="price"><%= number_to_currency(vehicle.asking_price, :precision => 2) %></div>
+	</div>      
+	<div class="detail">
+		<div class="carDetail">
+			<span class="carImage"><%= link_to image_tag(vehicle.vehicle_thumb_image, :alt => :Photo), private_vehicle_path(vehicle) -%><br />
+				<p class="more"><%= link_to "more photos &gt;&gt;", private_vehicle_path(vehicle) %></p>
+			</span>
+			<span class="details"><span class="bold"><%= t(:Used) %></span><br>
+			<%= t(:Mileage) %>: <%= vehicle.mileage %><br>
+			<%= vehicle.exterior_color %><br>
+		</span>
+
+		<p class="decs"><%= truncate(vehicle.detailed_info, :length => 110) %></p>
+	</div>
+
+	<div class="mileageDetail"><%= "%.2f" %"#{vehicle.distance_from(@loc) rescue 0}" if @loc %> <%= t(:Kms) %> </div>
+	<div class="sellerDetail"><span class="bold">Ph: <%= vehicle.seller.try(:phone_number) %></span></div>
+	<div class="carFax"><a href="#"><%= t(:Get_a_CARFAX) %></a></div>
+</div>
+</div>
+<% end -%>
+
+<%= will_paginate @searched_vehicles %>
+
+<% end %>

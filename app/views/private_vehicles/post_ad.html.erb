@@ -1,0 +1,152 @@
+<h2><%= t(:Step_5_Post_Ad) %></h2>
+<br />
+<% form_for :user, :url => sell_your_car_post_ad_thankyou_path(:new_user=>'new'), :method => :post, :html => {:onsubmit => "if(check_required_fields3() == 0) return false; else return true;"} do |f| -%>
+
+<% if session[:plan] == 'vip' -%>
+	<b><%= t(:Payment_Information) %></b><br />
+	<%= t(:complete_ur_plan_upgrade) %><br />
+	<% fields_for :payment_info do |info| -%>
+	<%= t(:Plan_options) %>:
+	<%= info.radio_button 'price_option', 30, :checked => 'checked' %>30 days: $14.99	
+	<%= info.radio_button 'price_option', 60 %>60 days: $19:99 
+	<%= info.radio_button 'price_option', 90 %>90 days: $24.99<br />
+	
+	<p><%= t(:Firstname) %>: 
+	<%= info.text_field :firstname %></p>
+	<span id='firstname_is_required' class='hidden_errors'><%= t(:required_firstname) %></span>
+	<p><%= t(:Middlename) %>: 
+	<%= info.text_field :middlename %></p>
+	<p><%= t(:Lastname) %>: 
+	<%= info.text_field :lastname %></p>
+	<span id='lastname_is_required' class='hidden_errors'><%= t(:required_lastaname) %></span>
+	<p><%= t(:Address) %>: 
+	<%= info.text_field :address %></p>
+	<span id='address_is_required' class='hidden_errors'><%= t(:required_address) %></span>
+	<p><%= t(:City) %>: 
+	<%= info.text_field :city %></p>
+	<span id='city_is_required' class='hidden_errors'><%= t(:required_city) %></span>
+	<p><%= t(:State) %>: 
+	<%= info.text_field :state %></p>
+	<span id='state_is_required' class='hidden_errors'><%= t(:required_state) %></span>
+	<p><%= t(:Postal_code) %>: 
+	<%= info.text_field :postal_code %></p>
+	<span id='postal_code_is_required' class='hidden_errors'><%= t(:required_postal_code) %></span>
+	
+		<!-- <p>Firstname: 
+		<%= text_field_tag :firstname, nil %></p>
+		<p>Middlename: 
+		<%= text_field_tag :middlename, nil %></p>
+		<p>Lastname: 
+		<%= text_field_tag :lastname, nil %></p>
+		<p>Address: 
+		<%= text_field_tag :address, nil %></p>
+		<p>City: 
+		<%= text_field_tag :city, nil %></p>
+		<p>State: 
+		<%= text_field_tag :state, nil %></p>
+		<p>Postal code: 
+		<%= text_field_tag :postal_code, nil %></p> -->
+		
+	<% end -%>
+	
+	
+	<br /><br />
+	<%= t(:Payment_Information) %><br />
+	<div class="data_row billing billingInformation">
+		<span id="ctl00_ctl00_ctl00_ctl00_pageContent_body_content00_subtitledArea_subtitledBody_billingInfo_cardTypeLabel">Card Type</span><br/>
+		<select id="ctl00_ctl00_ctl00_ctl00_pageContent_body_content00_subtitledArea_subtitledBody_billingInfo_cardTypeDropDownList" name="ctl00$ctl00$ctl00$ctl00$pageContent$body$content00$subtitledArea$subtitledBody$billingInfo$cardTypeDropDownList">
+			<option value="--">--</option>
+			<option value="AmericanExpress">American Express</option>
+			<option value="Discover">Discover</option>
+			<option value="MasterCard">Master Card</option>
+			<option value="Visa">Visa</option>
+		</select>
+	</div>
+	<div class="data_row billing billingInformation containsFloats">
+		<div style="float: left;">
+			<span id="ctl00_ctl00_ctl00_ctl00_pageContent_body_content00_subtitledArea_subtitledBody_billingInfo_cardNumberLabel">Card Number</span><br/>
+			<input type="text" class="cardNumberTextBox" id="ctl00_ctl00_ctl00_ctl00_pageContent_body_content00_subtitledArea_subtitledBody_billingInfo_cardNumberTextBox" name="ctl00$ctl00$ctl00$ctl00$pageContent$body$content00$subtitledArea$subtitledBody$billingInfo$cardNumberTextBox"/>
+		</div>
+		<div style="float: left; padding-left: 8px;">
+			<span class="securityCode" id="ctl00_ctl00_ctl00_ctl00_pageContent_body_content00_subtitledArea_subtitledBody_billingInfo_securityCodeLabel">Security Code</span><br/>
+			<input type="text" style="width: 30px;" class="securityCodeTextBox" id="ctl00_ctl00_ctl00_ctl00_pageContent_body_content00_subtitledArea_subtitledBody_billingInfo_securityCodeTextBox" maxlength="4" name="ctl00$ctl00$ctl00$ctl00$pageContent$body$content00$subtitledArea$subtitledBody$billingInfo$securityCodeTextBox"/><br/>
+		</div>
+	</div><br />
+	<div class="data_row billing billingInformation">
+		<span id="ctl00_ctl00_ctl00_ctl00_pageContent_body_content00_subtitledArea_subtitledBody_billingInfo_Expiration">Expiration</span><br/>
+		<select id="ctl00_ctl00_ctl00_ctl00_pageContent_body_content00_subtitledArea_subtitledBody_billingInfo_monthDropDownList" name="ctl00$ctl00$ctl00$ctl00$pageContent$body$content00$subtitledArea$subtitledBody$billingInfo$monthDropDownList">
+			<option value="--">--</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
+		</select>
+		<select id="ctl00_ctl00_ctl00_ctl00_pageContent_body_content00_subtitledArea_subtitledBody_billingInfo_yearDropDownList" name="ctl00$ctl00$ctl00$ctl00$pageContent$body$content00$subtitledArea$subtitledBody$billingInfo$yearDropDownList">
+			<option value="2009" selected="selected">2009</option>
+			<option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option>
+		</select>
+	</div>
+			
+			
+<% end -%>
+<hr />
+<p>
+	<%= t(:respect_ur_privacy) %>
+</p>
+<p>
+	<%= t(:Contact_Information) %>
+	<br />
+	<%= t(:buyers_contact_through_emails) %><br />
+	
+<% if !logged_in? %>
+	
+		<%= t(:we_require_contact_phone) %><br />
+		<%= f.text_field :phone_number %>
+		<span id='phone_number_is_required' class='hidden_errors'><%= t(:required_phone_number) %></span>
+	</p>
+	<br />
+	<div>
+		<b><%= t(:User_Account) %></b><br />
+		<%= t(:register_or_signup) %>
+	<br />
+
+	<%= t(:First_time_User) %><br />
+	<%# form_for :user, :url => users_path do |f| -%>
+
+		<p><%= label_tag 'email' %><br/>
+		<%= f.text_field :email %></p>
+		<span id='email_is_required' class='hidden_errors'><%= t(:required_email) %></span>
+
+		<p><%= label_tag 'password' %><br/>
+		<%= f.password_field :password %></p>
+		<span id='password_is_required' class='hidden_errors'><%= t(:required_password) %></span>
+
+		<p><%= label_tag 'password_confirmation', t(:Confirm_Password) %><br/>
+		<%= f.password_field :password_confirmation %></p>
+		<span id='pass_confirm_is_required' class='hidden_errors'><%= t(:required_password_confirmation) %></span>
+	
+		<p><%= label_tag 'firstname' %><br/>
+		<%= f.text_field :firstname %></p>
+		<span id='user_firstname_is_required' class='hidden_errors'><%= t(:required_firstname) %></span>
+
+		<p><%= label_tag 'lastname' %><br/>
+		<%= f.text_field :lastname %></p>
+		<span id='user_lastname_is_required' class='hidden_errors'><%= t(:required_lastname) %></span>
+	
+		<p><%= label_tag 'zipcode', t(:Postal_code) %><br/>
+		<%= f.text_field :zipcode %></p>
+		<span id='zipcode_is_required' class='hidden_errors'><%= t(:required_postal_code) %></span>
+	
+	</div>
+	
+	<br />
+	<%= t(:Returning_Users) %><br />
+	<div>
+		<%= render :partial => 'login_and_save' %>
+	</div>
+<% else %>
+
+ 	<br /><%= button_to t(:post_your_ad), sell_your_car_post_ad_thankyou_path %>
+	
+<% end %>
+
+<%if !logged_in?%><p><div class="button"><span>&nbsp;</span><%= f.submit t(:post_your_ad), :class=>'submit' %></div></p><%end%>
+<% end -%>
+
+</div>

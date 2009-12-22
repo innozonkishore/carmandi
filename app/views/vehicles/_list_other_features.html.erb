@@ -1,0 +1,10 @@
+<h2><%= t(:Other_Features) %></h2>
+
+<% @other_features.each do |of| %>
+
+<p class="<%= cycle('even','') %>">
+	<span><%= of.split(":")[0] %></span> : 
+	<span><%= of.split(":")[1] %></span>
+</p>
+
+<% end %>

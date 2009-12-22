@@ -1,0 +1,38 @@
+<div class="newCars usedCar">
+  <div class="selectCar">
+    <h1 class="newCarHeading">
+			<%= t(:New_Cars) %>
+		</h1>
+
+	<% count = ((@vehicle_makes.size)/3) %>
+	
+	<% a = [] %>
+	<% @vehicle_makes.each_slice(count) do |make| a<<make end %>
+	<% if a.size > 3 
+		a[2] = a[2]+ a[3]
+		a[3] = nil
+		a.compact!
+		end
+	%>
+	<div class="carType">
+	<% counter = 1 %>
+	<% for make_array in a %>
+	<div style ="float:left; width:155px; margin-left: 10px" class = '<%= "counter_#{counter}" %>'>
+		<% for make in make_array -%>
+		<h3>
+			<%= link_to make.name, make.url.try(:ensure_url), :popup => true %>
+		</h3>
+		<% end -%>
+		<% counter = counter + 1 %>
+	</div>
+	<% end %>
+	</div>
+	<!-- <ul class="carlist newCars">
+		<% for make in @vehicle_makes %>
+		<li>
+			<%= link_to make.name, make.url.try(:ensure_url), :popup => true %>
+		</li>
+		<% end %>
+	</ul> -->
+</div>
+</div>	

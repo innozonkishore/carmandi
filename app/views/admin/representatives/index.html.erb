@@ -1,0 +1,101 @@
+<%if @representatives.blank? %>
+<div class = "admin_links">
+  <p>
+    <%= t(:no_representative_yet) %> 
+  </p>
+  <p>
+    <%= t(:try_creating_one_now) %> <%=link_to t(:clicking_here), new_admin_representative_path %>
+  </p>
+</div>
+<%else %>
+<div class="active-scaffold active-scaffold-as_admin__representative admin/representative-view default-theme" id="as_admin__representative-active-scaffold">
+  <div class="active-scaffold-header">
+    <div class="actions">
+      <%=link_to t(:create_new), new_admin_representative_path, :class => 'new action' %>
+    </div>
+    <h2>
+      <%= t(:Representatives) %>
+    </h2>
+  </div>
+  <table cellspacing="0" cellpadding="0">
+    <tbody id="as_admin__representative-search-container" class="before-header">
+      <tr>
+        <td/>
+      </tr>
+    </tbody>
+  </table>
+  <div id="as_admin__representative-content">
+    <table cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th title="">
+            <a>
+              <%= t(:First_Name) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Last_Name) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Phone_Number) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Email) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Active) %>
+            </a>
+          </th>
+          <th class="actions">
+          </th>
+        </tr>
+      </thead>
+      <tbody id="as_admin__representative-tbody" class="records">
+        <% for representative in @representatives %>
+        <tr id="as_admin__representative-list-3-row" class="record">
+          <td class="name-column sorted">
+            <%= representative.firstname %>
+          </td>
+          <td>
+            <%= representative.lastname %>
+          </td>
+          <td>
+            <%= representative.phone_number %>
+          </td>
+          <td>
+            <%= representative.email %>
+          </td>
+          <td>
+            <%= representative.active %>
+          </td>
+          <td class="actions">
+            <table cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td class="indicator-container">
+                    <img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif?1250079352" id="as_admin__representative-record-3-loading-indicator" class="loading-indicator" alt="loading indicator"/>
+                  </td>
+                  <td>
+                    <%= link_to t(:Edit), edit_admin_representative_path(representative) %>
+                  </td>
+                  <td>
+                    <%= link_to t(:Show), admin_representative_path(representative) %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%end %>

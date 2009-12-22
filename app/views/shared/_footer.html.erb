@@ -1,0 +1,53 @@
+<div class="footer">
+	<div class="ads">
+		<% if current_page?(:controller => 'home', :action => 'index') || @main_ads == true %>
+			<%= render :partial => 'shared/footer_ad', :locals => {:left=>'bottom_row_left_home', :middle=>'bottom_row_middle_home', :right=>'bottom_row_right_home'} %>
+		<% elsif @new_car == true -%>
+			<%= render :partial => 'shared/footer_ad', :locals => {:left=>'bottom_row_left_new_car', :middle=>'bottom_row_middle_new_car', :right=>'bottom_row_right_new_car'} %>
+		<% elsif session[:clearance_center] == nil && @used_car == true %>
+			<%= render :partial => 'shared/footer_ad', :locals => {:left=>'bottom_row_left_used_car', :middle=>'bottom_row_middle_used_car', :right=>'bottom_row_right_used_car'} %>
+		<% elsif @clearance_center == true %>
+			<%= render :partial => 'shared/footer_ad', :locals => {:left=>'bottom_row_left_clearance_center', :middle=>'bottom_row_middle_clearance_center', :right=>'bottom_row_right_clearance_center'} %>
+		<% elsif @private_sales == true %>
+			<%= render :partial => 'shared/footer_ad', :locals => {:left=>'bottom_row_left_private_sales', :middle=>'bottom_row_middle_private_sales', :right=>'bottom_row_right_private_sales'} %>
+		<% elsif @sell_your_car == true %>
+			<%= render :partial => 'shared/footer_ad', :locals => {:left=>'bottom_row_left_sell_your_car', :middle=>'bottom_row_middle_sell_your_car', :right=>'bottom_row_right_sell_your_car'} %>
+		<% elsif @show_link == true && @link %>
+			<%= render :partial => 'shared/footer_ad', :locals => {:left=>'bottom_row_left_'+@link.name_english, :middle=>'bottom_row_middle_'+@link.name_english, :right=>'bottom_row_right_'+@link.name_english} %>
+		<% elsif @calculator == true %>
+			<%= render :partial => 'shared/footer_ad', :locals => {:left=>'bottom_row_left_monthly_payment_calculator', :middle=>'bottom_row_middle_monthly_payment_calculator', :right=>'bottom_row_right_monthly_payment_calculator'} %>
+		<% end -%>
+	</div>    
+	<p class="copyright">&copy; <%= t(:All_Rights_Reserved) %> </p>
+	<ul>
+		<li><%= link_to t(:Home), root_path %></li>
+		<li><%= link_to t(:About_us), about_us_path %></li>
+		<li><%=link_to t(:View_our_Privacy_and_Disclaimer_Statements), privacy_policy_path, :class => :frist %></li>
+		<li><%= link_to t(:Contact_us), contact_us_path %></li>
+		<li class="last"><a href="#"><%= t(:Help) %></a></li>
+	</ul>        
+</div>
+
+<% if current_page?(:controller => 'static', :action => 'new_cars') %>
+<script>document.getElementById('new_car').className = 'active';</script>
+<% elsif session[:clearance_center] == nil && (current_page?(:controller => 'vehicles', :action => 'used_car') || current_page?(:controller => 'vehicles', :action => 'select_category') || current_page?(:controller => 'vehicles', :action => 'select_price') || current_page?(:controller => 'vehicles', :action => 'search_result') || current_page?(:controller => 'vehicles', :action => 'show')) %>
+<script>document.getElementById('used_car').className = 'active';</script>
+<% elsif current_page?(:controller => 'vehicles', :action => 'clearance_center') || current_page?(:controller => 'vehicles', :action => 'select_category') || current_page?(:controller => 'vehicles', :action => 'select_price') || current_page?(:controller => 'vehicles', :action => 'search_result') || current_page?(:controller => 'vehicles', :action => 'show') %>
+<script>document.getElementById('clearance_center').className = 'active';</script>
+<% elsif current_page?(:controller => 'private_vehicles', :action => 'search') || current_page?(:controller => 'private_vehicles', :action => 'listing') %>
+<script>document.getElementById('private_sales').className = 'active';</script>
+<% elsif current_page?(:controller => 'sell_your_car') || current_page?(:controller => 'sell_your_car', :action => 'start_ad') || current_page?(:controller => 'sell_your_car', :action => 'detail_info') || current_page?(:controller => 'sell_your_car', :action => 'upload_photo') || current_page?(:controller => 'sell_your_car', :action => 'review_ad') || current_page?(:controller => 'sell_your_car', :action => 'post_ad') %>
+<script>document.getElementById('sell_your_car').className = 'active';</script>
+<% end %>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+	var pageTracker = _gat._getTracker("UA-10471718-1");
+	pageTracker._trackPageview();
+}
+catch(err) {}
+</script>

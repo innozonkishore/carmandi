@@ -1,0 +1,50 @@
+<% if params[:dealer_id] -%>
+<%= error_messages_for :vehicle %>
+<% if @vehicle.new_record? %>
+<% target = admin_vehicles_path( :dealer_id => params[:dealer_id]) %>
+<% method = 'post' %>
+<% else -%>
+<% target = admin_vehicle_path(:id => @vehicle.id, :dealer_id => params[:dealer_id]) %>
+<% method = 'put' %>
+<% end %>
+<div class="adminForm">
+  <% form_for @vehicle, :url => target, :method => method, :html => {:onsubmit => "submit_vehicle_form(); return false;", :multipart => :true, :id => 'vehicle_upload_form'} do |f| -%>
+  <%= render :partial => 'new_vehicle', :locals => { :f => f, :vehicle => @vehicle, :called_function => 'new' } %>
+  <% if @vehicle.new_record? -%>
+  <%= hidden_field :vehicle, :dealer_id, :value => params[:dealer_id] %>
+  <% end -%>
+  <div class="labelMargin even">
+    <div class="button">
+      <span>
+        &nbsp;
+      </span>
+      <%= submit_tag t(:Upload), :id => 'vehicle_form_submit_btn', :class=>'submit' %>
+    <span class ='no_button' id = 'vehicle_form_loading' style ='display:none;'>
+      <%=image_tag 'loading.gif' %>
+    </span>
+      
+      | <%= link_to t(:Cancel), admin_vehicles_path %>
+    </div>
+  </div>
+  <% end -%>
+  <% else -%>
+  <% if @all_dealers.blank? %>
+  <div>
+    <b>
+      <%= t(:no_dealer_to_chose) %><%=link_to t(:clicking_here), new_admin_dealer_path %>
+    </b>
+  </div>
+  <% else %>
+  <div>
+    <b>
+      <%= t(:select_a_dealer) %>
+    </b>
+  </div>
+  <br/>
+  <% form_for @vehicle, :url => new_admin_vehicle_path, :html=>{:method => :get} do |v| %>
+  <%= select_tag "dealer_id", options_for_select(@all_dealers.collect {|d| [ d.dealership_name, d.id ]}) %>
+  <%= submit_tag t(:Next) %>
+  <% end %>
+  <% end %>
+  <% end -%>
+</div>

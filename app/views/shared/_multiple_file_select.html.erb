@@ -1,0 +1,71 @@
+<%= javascript_include_tag 'swfupload' %>
+<%= javascript_include_tag 'handlers' %>
+<%= stylesheet_link_tag 'swfupload' %>
+<script type='text/javascript'>
+  var swfu;
+  
+  window.onload = function(){
+      swfu = new SWFUpload({
+          // Create the custom swfupload_photos_path in the routes.rb file
+          upload_url: '<%= swfupload_admin_vehicles_path -%>',
+          // flash_url : '/assets/swfupload_f9.swf',
+          
+          file_size_limit: '<%=@max_upload_size%> MB',
+          file_types: '*.jpg;*.gif;*.png',
+          file_types_description: 'Web Image Files',
+          file_upload_limit: '<%=@max_images%>',
+          
+          file_queue_error_handler: fileQueueError,
+          file_dialog_complete_handler: fileDialogComplete,
+          upload_progress_handler: uploadProgress,
+          upload_error_handler: uploadError,
+          upload_success_handler: uploadSuccess,
+          upload_complete_handler: uploadComplete,
+          
+          file_queued_handler: fileQueued,
+          
+          
+          custom_settings: {
+              upload_target: 'divFileProgressContainer'
+          },
+          
+          // Button Settings
+          button_image_url: "/images/spyglass.png",
+          button_placeholder_id: "spanButtonPlaceholder",
+          button_width: 180,
+          button_height: 18,
+          button_text: '<span class="button">Select Images <span class="buttonSmall">(<%=@max_images%> Max)</span></span>',
+          button_text_style: '.button { font-family: Helvetica, Arial, sans-serif; font-size: 12pt; } .buttonSmall { font-size: 10pt; }',
+          button_text_top_padding: 0,
+          button_text_left_padding: 18,
+          button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+          button_cursor: SWFUpload.CURSOR.HAND,
+          
+          // Flash Settings
+          flash_url: "/assets/swfupload.swf",
+          
+          custom_settings: {
+              upload_target: "divFileProgressContainer"
+          },
+          
+          debug: false
+      
+      });
+  };
+</script>
+<div style="margin: 0px 10px;">
+  <div>
+    <form>
+      <div style="display: inline; border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px 2px 10px 2px;">
+        <span id="spanButtonPlaceholder">
+        </span>
+      </div>
+    </form>
+  </div>
+  <div id="divFileProgressContainer" style="min-height: 5px;">
+  </div>
+  <div id="thumbnails">
+  </div>
+</div>
+<div id ="photo_files">
+</div>

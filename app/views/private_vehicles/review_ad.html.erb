@@ -1,0 +1,26 @@
+<h2><%= t(:Step4_Review_Ad) %></h2>
+<br />
+<%= t(:Vehicle_Information) %>
+<br />
+<%= t(:make_sure_vehicle_info_is_correct) %>
+<br /><br />
+<%= link_to t(:edit_vehicle_details), sell_your_car_start_add_path, :method => :post %><br />
+<%= t(:Year) %> <%= @unsupported_vehicle.model_year %><br />
+<%= t(:Make) %> <%= @unsupported_vehicle.vehicle_make.try(:name) %><br />
+<%= t(:Model) %> <%= @unsupported_vehicle.vehicle_model.try(:name) %><br />
+<%= t(:Trim) %> <%= @unsupported_vehicle.trim %><br />
+<%= t(:Postcode) %> <%= @unsupported_vehicle.zipcode %><br />
+<%= t(:Doors) %> <%= @unsupported_vehicle.doors %><br />
+<%= t(:Exterior_color) %> <%= @unsupported_vehicle.exterior_color %><br />
+<%= t(:Interior_color) %> <%= @unsupported_vehicle.interior_color %><br />
+<%= t(:Mileage) %> <%= @unsupported_vehicle.mileage %><br />
+<%= t(:Transmission) %> <%= @unsupported_vehicle.transmission %><br />
+<%= t(:Price) %> <%= @unsupported_vehicle.asking_price %><%= link_to t(:edit), sell_your_car_detail_info_path, :method => :post %><br />
+<%= t(:Additional_Comment) %> 
+<%= @unsupported_vehicle.detailed_info %><%= link_to "edit", sell_your_car_detail_info_path, :method => :post %><br />
+<%= t(:Vehicle_photo) %><br />
+<%= image_tag @unsupported_vehicle.vehicle_thumb_image %>
+<%= link_to t(:edit_my_photo), sell_your_car_upload_photo_path, :method => :post %>
+<br /><br />
+
+<%= link_to t(:Next), sell_your_car_post_ad_path, :method => :post %>

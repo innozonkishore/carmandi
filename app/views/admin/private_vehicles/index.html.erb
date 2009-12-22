@@ -1,0 +1,146 @@
+<%if @private_vehicles.blank? %>
+<div class = "admin_links">
+  <p>
+    <%= t(:no_private_vehicles) %> 
+  </p>
+</div>
+<% else %>
+<div class="active-scaffold active-scaffold-as_admin__representative admin/representative-view default-theme" id="as_admin__representative-active-scaffold">
+  <div class="active-scaffold-header">
+    <div class="actions">
+      <%#=link_to t(:create_new), new_admin_dealer_path, :class => 'new action' %>
+ 		</div>
+    <h2>
+      <%= t(:Private_vehicles) %>
+    </h2>
+  </div>
+  <table cellspacing="0" cellpadding="0">
+    <tbody id="as_admin__representative-search-container" class="before-header">
+      <tr>
+        <td/>
+      </tr>
+    </tbody>
+  </table>
+  <div id="as_admin__dealer-content">
+    <table cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+	        <th title="">
+            <a>
+              <%= t(:Photo) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:VIN) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Vehicle_make) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Vehicle_model) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Amount_Collected) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Listing_deadline) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Seller_name) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Postal_code) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Phone_Number) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Email) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Status) %>
+            </a>
+          </th>
+          <th class="actions">
+          </th>
+        </tr>
+      </thead>
+      <tbody id="as_admin__representative-tbody" class="records">
+        <% for vehicle in @private_vehicles %>
+        <tr id="as_admin__representative-list-3-row" class="record" >
+          <td>
+						<%= image_tag vehicle.photos.first.public_filename(:thumb), :align => :absmiddle unless vehicle.photos.empty? %>
+          </td>
+          <td>
+						<%= vehicle.vin %>
+          </td>
+          <td>
+						<%= vehicle.vehicle_make.name %>
+          </td>
+          <td>
+						<%= vehicle.model %>
+          </td>
+          <td>
+						<%= vehicle.amount_collected %>
+          </td>
+          <td>
+						<%= vehicle.deadline %>
+          </td>
+          <td>
+						<%= vehicle.seller.try(:firstname) %>
+          </td>
+          <td>
+						<%= vehicle.seller.try(:zipcode) %>
+          </td>
+          <td>
+						<%= vehicle.seller.try(:phone_number) %>
+          </td>
+          <td>
+						<%= vehicle.seller.try(:email) %>
+          </td>
+          <td>
+						<%= vehicle.status %>
+          </td>
+          <td class="actions">
+            <table cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td class="indicator-container">
+                    <img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif?1250079352" id="as_admin__representative-record-3-loading-indicator" class="loading-indicator" alt="loading indicator"/>
+                  </td>
+                  <td>
+                    <%= link_to t(:Edit), edit_admin_private_vehicle_path(vehicle) %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= will_paginate @private_vehicles %>
+
+<% end %>

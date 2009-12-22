@@ -1,0 +1,113 @@
+<% if @vehicles.blank? %>
+<div class = "admin_links">
+  <p>
+    <%= t(:no_vehicle_yet) %>
+  </p>
+	<%= link_to "Back", my_account_users_path %>
+</div>
+<% else %>
+<div>
+  <h1>
+    <%= t(:Private_vehicles) %>
+  </h1>
+
+  <div>
+    <table cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th title="">
+            <a>
+              <%= t(:Vehicle_photo) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:VIN_Number) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Vehicle_make) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Vehicle_model) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Category) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= link_to t(:Postal_code), admin_vehicles_path(:sort_by => 'dealership') %>
+            </a>
+          </th>
+           <th title="">
+            <a>
+              <%= link_to t(:Status), admin_vehicles_path(:sort_by => 'status') %>
+            </a>
+          </th>
+          <th class="actions">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for vehicle in @vehicles %>
+        <tr>
+          <td>
+            <%= image_tag(vehicle.vehicle_thumb_image, :alt => :Photo, :height=>"45", :width=>"60") -%>
+          </td>
+          <td>
+            <%= vehicle.vin %>
+          </td>
+          <td>
+            <%= vehicle.vehicle_make.name %>
+          </td>
+          <td>
+            <%= vehicle.model %>
+          </td>
+          <td>
+            <%= vehicle.category.name %>
+          </td>
+          <td>
+            <%= vehicle.zipcode %>
+          </td>
+          <td>
+            <%= vehicle.status %>
+          </td>
+          <td class="actions">
+            <table cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td class="indicator-container">
+                    <img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif?1250079352" id="as_admin__representative-record-3-loading-indicator" class="loading-indicator" alt="loading indicator"/>
+                  </td>
+                  <td>
+                    <%= link_to t(:Edit), edit_private_vehicle_path(vehicle) %>
+                  </td>
+                  <td>
+                    <%= link_to t(:Show), show_current_user_vehicle_private_vehicle_path(vehicle) %>
+                  </td>
+									<td>
+										<%= link_to t(:Edit_Photo), edit_photo_private_vehicle_path(vehicle) %>
+									</td>
+                  <td>
+                    <%= link_to t(:Delete), private_vehicle_path(vehicle), :method => :delete, :confirm => "Are you sure to delete this ad?" %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= will_paginate @vehicles %>
+
+<% end %>

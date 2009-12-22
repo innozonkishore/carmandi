@@ -1,0 +1,20 @@
+<div class="login">
+    <h1><%= t(:Log_in) %></h1>
+    
+    <% form_tag '/sessions', :method => :post do -%>
+    
+    <div class="formFeild"><%= label_tag 'email' %>    <%= text_field_tag 'email', @login , :class=> "textbox"%></div>
+    <div class="formFeild"><%= label_tag 'password' %>    <%= password_field_tag 'password', nil, :class=> "textbox" %></div>
+    
+    <!-- Uncomment this if you want this functionality -->
+    <div class="formFeild">
+        <div class="rightLabel"><%= check_box_tag 'remember_me', '1', @remember_me %> <%= label_tag 'remember_me', t(:Remember_me) %> </div>
+    </div>    
+    <div class="formFeild">
+        <div class="rightLabel"><%= link_to t(:forgot_password), forgot_path, :class=>"forgot" %></div>
+    </div>    
+    <div class="formFeild">
+        <div class="rightLabel"><div class="button"><span>&nbsp;</span><%= submit_tag t(:Log_in) , :class=>"submit" %></div></div>
+    </div>    
+    <% end -%>
+</div>

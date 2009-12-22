@@ -1,0 +1,39 @@
+<% form_for [:admin, @link] do |f| -%>
+	<%= error_messages_for :link %>
+	
+	<%= t(:List_this_link_under) %>: 
+	<div class="formFeild">
+		<label>&nbsp;</label>
+		<%= f.radio_button :useful, true, {:checked => @link.useful==true} %> <%= t(:Useful_links) %>
+		<%= f.radio_button :useful, false, {:checked => @link.useful==false} %> <%= t(:Important_links) %>
+	</div>
+	<div class="formFeild">
+		<label><%= t(:Display_name) %> (<%= t(:english) %>): </label>
+	 <%= f.text_field :name_english %>
+	</div>
+	<div class="formFeild">
+		<label><%= t(:Display_name) %> (<%= t(:hindi) %>): </label><%= f.text_field :name_hindi %>
+	</div>
+	<div class="formFeild">
+		<label><%= t(:Display_name) %> (<%= t(:urdu) %>):</label> <%= f.text_field :name_urdu %>
+	</div>
+	<div class="formFeild">
+		<label><%= t(:Display_name) %> (<%= t(:punjabi) %>):</label> <%= f.text_field :name_punjabi %>
+	</div>
+	<div class="formFeild">
+		<label><%= t(:Position_of_link) %>:</label> <%= f.text_field :position %>
+	</div>	
+	<div class="formFeild">
+		<label>	<%= t(:Status) %>:</label> <%= f.select :status, Link::STATUS %>
+	</div>
+	<div class="formFeild">
+		<label>&nbsp;</label>
+			<% if @link.new_record? %>
+				<div class="button"><span>&nbsp;</span><%= f.submit t(:Add_link), :class=>'submit' %>
+			<% else %>
+						<span>&nbsp;</span><%= f.submit t(:Save), :class=>'submit' %>
+			<% end %>
+			 | <%= link_to t(:Cancel), admin_links_path %>
+			 </div>
+	</div>
+<% end -%>

@@ -1,0 +1,55 @@
+<% if @vehicle.plan == 'basic' %>
+	<% if @photos.blank? -%>
+		<%= t(:no_vehicle_associated_photo) %>
+	<% else -%>
+		<%= image_tag @vehicle.photos.first.public_filename(:thumb) %>
+		<br />
+		<%= t(:select_photo_to_change) %>
+	<% end -%>
+		<% form_for :vehicle, :url => update_photo_private_vehicles_path, :method => :put, :html => {:multipart => :true} do |f| %>
+			<%= f.hidden_field :id %>
+			<%= t(:Upload_your_own_photo) %>
+			<div class="mtb10" id = "mtb10">
+			  <div id = 'new_file'>
+			    <%= file_field_tag 'photos[]', :id =>'first_file_element', :size => 23 -%>
+			    <a class="small grey underline" onclick='remove_file(this)' onmouseover="change_cursor();" onmouseout='change_cursor_again();'>
+			      <%= t(:Delete) %>
+			    </a>
+			  </div>
+			</div>
+			<%= f.submit t(:Submit) %>
+		<% end %>
+	
+<% else %>
+
+	<% if @photos.blank? -%>
+		<%= t(:no_vehicle_associated_photos) %>
+	<% else -%>
+		<% for p in @photos %>
+			<%= image_tag p.public_filename(:thumb) %>
+			<br />
+		<% end %>
+		<br />
+		<%= t(:please_add_new_photos_for_vehicle) %>
+	<% end -%>
+
+	<% form_for :vehicle, :url => update_photo_private_vehicles_path, :method => :put, :html => {:multipart => :true} do |f| %>
+		<%= f.hidden_field :id %>
+		<br />
+		<div class="mtb10" id = "mtb10">
+		  <div id = 'new_file'>
+		    <%= file_field_tag 'photos[]', :id =>'first_file_element', :size => 23 -%>
+		    <a class="small grey underline" onclick='remove_file(this)' onmouseover="change_cursor();" onmouseout='change_cursor_again();'>
+		      <%= t(:Delete) %>
+		    </a>
+		  </div>
+		</div>
+		<a class="small grey underline" id = "small grey underline1" onclick ='attach_new_file();' onmouseover="change_cursor();" onmouseout='change_cursor_again();'>
+		  <%= t(:further_attach) %>
+		</a>
+		<br />
+	
+		<%= submit_tag t(:Next) %>
+	<% end %>
+
+<% end %>

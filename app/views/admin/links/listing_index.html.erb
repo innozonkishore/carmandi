@@ -1,0 +1,114 @@
+<% if @listings.blank? %>
+<div class = "admin_links">
+	<p>
+		<%= t(:no_listing_yet) %> 
+	</p>
+	<p>
+		<%= t(:try_creating_one_now) %> <%=link_to t(:clicking_here), add_listing_admin_links_path %>
+	</p>
+</div>
+<% else %>
+<div class="active-scaffold active-scaffold-as_admin__representative admin/representative-view default-theme" id="as_admin__representative-active-scaffold">
+	<div class="active-scaffold-header">
+		<div class="actions">
+			<%=link_to t(:create_new), add_listing_admin_links_path, :class => 'new action' %>
+		</div>
+		<h2>
+			<%= t(:Listings) %>
+		</h2>
+	</div>
+	<div id="as_admin__representative-content">
+		<table cellspacing="0" cellpadding="0" class = "as_admin__representative-content">
+			<thead>
+				<tr>
+					<th title="">
+						<a>
+							<%= t(:Name) %>
+						</a>
+					</th>
+					<th title="" class="webAddress">
+						<a>
+							<%= t(:Web_address) %>
+						</a>
+					</th>  <th title="">
+						<a>
+							<%= t(:Full_Address) %>
+						</a>
+					</th>
+					<th title="">
+						<a>
+							<%= t(:Contact_info) %>
+						</a>
+					</th>
+					<th title="">
+						<a>
+							<%= t(:Description) %>
+						</a>
+					</th>
+					<th title="">
+						<a>
+							<%= t(:Position) %>
+						</a>
+					</th>
+					<th title="">
+						<a>
+							<%= t(:Link) %>
+						</a>
+					</th>
+					<th title="">
+						<a>
+							<%= t(:Status) %>
+						</a>
+					</th>
+					<th class="actions">
+					</th>
+				</tr>
+			</thead>
+			<tbody id="as_admin__representative-tbody" class="records">
+				<% for listing in @listings %>
+				<tr id="as_admin__representative-list-3-row" class="record">
+					<td class="name-column sorted">
+						<%= listing.name %>
+					</td>
+					<td class="webAddress">
+						<%= listing.web_address %>
+					</td>
+					<td>
+						<%= listing.full_address %>
+					</td>
+					<td>
+						<%= listing.contact_info %>
+					</td>
+					<td>
+						<%= listing.description %>
+					</td>
+					<td>
+						<%= listing.position %>
+					</td>
+					<td>
+						<%= listing.link.name_english %>
+					</td>
+					<td>
+						<%= listing.status %>
+					</td>
+					<td class="actions">
+						<table cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<td class="indicator-container">
+										<img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif?1250079352" id="as_admin__representative-record-3-loading-indicator" class="loading-indicator" alt="loading indicator"/>
+									</td>
+									<td>
+										<%= link_to t(:Edit), edit_listing_admin_link_path(listing) %>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<% end %>

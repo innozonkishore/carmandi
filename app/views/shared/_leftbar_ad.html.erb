@@ -1,0 +1,7 @@
+<% if AdLocation.leftbar_ad(ad_page)[0] == '0' %>
+	<%= AdLocation.leftbar_ad(ad_page)[1] %>
+<% elsif AdLocation.leftbar_ad(ad_page)[0] == '1' && AdLocation.leftbar_ad(ad_page)[2] %>
+	<%= link_to image_tag(AdLocation.leftbar_ad(ad_page)[1]), AdLocation.leftbar_ad(ad_page)[2].ensure_url, :popup => true %>
+<% else %>
+	<%= image_tag AdLocation.leftbar_ad(ad_page)[1] %>
+<% end %>

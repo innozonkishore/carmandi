@@ -1,0 +1,6 @@
+<h2><%= t(:Standard_Features) %></h2>
+<div class="<%= cycle('even','') %>">
+<% for sf in @standard_features %>
+	<p><span><%= sf %></span></p>
+<% end %>
+</div>

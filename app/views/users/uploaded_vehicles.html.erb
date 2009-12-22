@@ -1,0 +1,92 @@
+<% if @vehicles.blank? %>
+<div class = "admin_links">
+  <p>
+    <%= t(:no_vehicle_yet) %>
+  </p>
+  <p>
+	<% if current_user.is_admin? || current_user.is_representative? %>
+    <%= t(:try_creating_one_now) %> <%=link_to t(:clicking_here), new_admin_vehicle_path %>
+	<% else %>
+		<%= t(:try_creating_one_now) %> <%=link_to t(:clicking_here), new_vehicle_path %>
+	<% end %>
+  </p>
+</div>
+<% else %>
+<div class="active-scaffold active-scaffold-as_admin__representative admin/representative-view default-theme" id="as_admin__representative-active-scaffold">
+  <div class="active-scaffold-header">
+    <div class="actions">
+      <%#= link_to "Create New", new_admin_vehicle_path, :class => 'new action' %>
+    </div>
+    <h2>
+      <%= t(:Vehicles) %>
+    </h2>
+  </div>
+  <table cellspacing="0" cellpadding="0">
+    <tbody id="as_admin__representative-search-container" class="before-header">
+      <tr>
+        <td/>
+      </tr>
+    </tbody>
+  </table>
+  <div id="as_admin__representative-content">
+    <table cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th title="">
+            <a>
+              <%= t(:Vehicle_photo) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Dealer_Name) %>
+            </a>
+          </th>
+           <th title="">
+            <a>
+              <%= t(:Status) %>
+            </a>
+          </th>
+          <th class="actions">
+          </th>
+        </tr>
+      </thead>
+      <tbody id="as_admin__representative-tbody" class="records">
+        <% for vehicle in @vehicles %>
+        <br/>
+        <tr id="as_admin__representative-list-3-row" class="record">
+          <td class="name-column sorted">
+            <%= image_tag(vehicle.vehicle_thumb_image, :alt => :Photo) -%>
+          </td>
+          <td>
+            <%= vehicle.dealer.user.firstname %>
+          </td>
+          <td>
+            <%= vehicle.status %>
+          </td>
+          <td class="actions">
+            <table cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td class="indicator-container">
+                    <img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif?1250079352" id="as_admin__representative-record-3-loading-indicator" class="loading-indicator" alt="loading indicator"/>
+                  </td>
+                  <td>
+                    <%= link_to t(:Edit), edit_vehicle_path(vehicle) %>
+                  </td>
+                  <td>
+                    <a>
+                      <%= t(:Show) %>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<% end %>

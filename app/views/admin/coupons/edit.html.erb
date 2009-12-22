@@ -1,0 +1,30 @@
+<% form_for [:admin, @coupon], :html => {:multipart => :true} do |f| -%>
+	<%= error_messages_for :coupon %>
+
+	<div class="formFeild"><label><%= t(:Coupon_Name) %></label>
+		<%= f.text_field "name", :size => 30 %>
+	</div>
+
+	<div class="formFeild">	
+		<label><%= t(:Coupon_Image) %></label>
+		<%= f.file_field :uploaded_data, :size => 30 %>
+		(<%= @coupon.filename %>)
+	</div>
+	
+	<div class="formFeild">
+		<label><%= t(:Status) %></label> 
+		<%= f.select :status, Coupon::STATUS %>
+	</div>
+	
+	<div class="formFeild">
+		<label>&nbsp;</label> 
+		<%= f.check_box :primary_display %> <%= t(:Mark_this_coupon_for_display) %>
+	</div>
+  <div class="formFeild">
+  	<label>&nbsp;</label>
+		<div class="button"><span>&nbsp;</span><%= f.submit t(:Save), :class=>"submit" %> | 
+		<%= link_to t(:Cancel), admin_coupons_path %>
+		</div>
+	</div>	
+	
+<% end -%>

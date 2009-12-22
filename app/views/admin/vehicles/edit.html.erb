@@ -1,0 +1,31 @@
+<%= error_messages_for :vehicle %>
+<% if @vehicle.new_record? %>
+<% target = admin_vehicles_path  %>
+<% method = 'post' %>
+<% else -%>
+<% target = admin_vehicle_path(@vehicle) %>
+<% method = 'put' %>
+<% end %>
+<div class="adminForm">
+<% form_for @vehicle, :url => target, :method => method, :html => {:onsubmit => "submit_vehicle_form(); return false;", :multipart => :true, :id => 'vehicle_upload_form'} do |f| -%>
+
+<%= render :partial => 'new_vehicle', :locals => { :f => f, :called_function => 'edit' } %>
+
+<% if @vehicle.new_record? -%>
+	<%= hidden_field :vehicle, :dealer_id, :value => @dealer_id %>
+<% end -%>
+
+<div>
+	<div class="labelMargin even">
+		<div class="button fl">
+	   	<span>&nbsp;</span><%= submit_tag 'Upload', :id => 'vehicle_form_submit_btn', :class=>'submit' %>
+	 		<span class ='no_button' id = 'vehicle_form_loading' style ='display:none;'>
+	   		<%=image_tag 'loading.gif' %>
+	 		</span>
+		</div>
+		<span class="fl mt10">| <%= link_to t(:Cancel), admin_vehicles_path %></span>
+	</div>
+	
+</div>
+<% end -%>
+</div>

@@ -1,0 +1,40 @@
+<h2><%= t(:Step3_Upload_Photo) %></h2>
+<br />
+
+<% if session[:plan] == 'basic' -%>
+	<% form_for :vehicle, :url => sell_your_car_review_ad_path, :method => :post, :html => {:multipart => :true} do |f| %>
+		<%= t(:Upload_your_own_photo) %>
+		<div class="mtb10" id = "mtb10">
+		  <div id = 'new_file'>
+		    <%= file_field_tag 'photos[]', :id =>'first_file_element', :size => 23 -%>
+		    <a class="small grey underline" onclick='remove_file(this)' onmouseover="change_cursor();" onmouseout='change_cursor_again();'>
+		      <%= t(:Delete) %>
+		    </a>
+		  </div>
+		</div>
+		<%= submit_tag t(:Next) %>
+	<% end %>
+	
+<% else -%>
+
+	<% form_for :vehicle, :url => sell_your_car_review_ad_path, :method => :post, :html => {:multipart => :true} do |f| %>
+		Upload your own photos
+		<br />
+		<%= t(:you_can_upload_21images) %>
+		<div class="mtb10" id = "mtb10">
+		  <div id = 'new_file'>
+		    <%= file_field_tag 'photos[]', :id =>'first_file_element', :size => 23 -%>
+		    <a class="small grey underline" onclick='remove_file(this)' onmouseover="change_cursor();" onmouseout='change_cursor_again();'>
+		      <%= t(:Delete) %>
+		    </a>
+		  </div>
+		</div>
+		<a class="small grey underline" id = "small grey underline1" onclick ='attach_new_file();' onmouseover="change_cursor();" onmouseout='change_cursor_again();'>
+		  <%= t(:further_attach) %>
+		</a>
+		<br />
+	
+		<%= submit_tag t(:Next) %>
+	<% end %>
+	
+<% end -%>

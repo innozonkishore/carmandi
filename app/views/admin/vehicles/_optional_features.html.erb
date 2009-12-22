@@ -1,0 +1,11 @@
+<h2><%= t(:Optional_Features) %></h2>
+
+<% @optional_features.each_with_index do |of, i| %>
+
+	<p class="<%= cycle('even','') %>">
+		<span><%= of %></span>
+		<%= radio_button_tag "of[#{i}]", "#{of}" %> <%= t(:Have) %>
+		<%= radio_button_tag "of[#{i}]", 0, true %> <%= t(:no_have) %>
+	</p>
+
+<% end %>

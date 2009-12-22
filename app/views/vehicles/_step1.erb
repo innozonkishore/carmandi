@@ -1,0 +1,63 @@
+<div class="usedCar">
+  <div class="selectCar">
+    <h2>
+      <span class="fl"><%= t(:Select_Makes) %></span>
+      <span class="usedcarCenter">
+        <% if page == 'used_cars' -%>
+		    <%= t(:Used_Cars) %>
+		    <% elsif page == 'clearance_center' -%>
+		    <%= t(:Clearance_center) %>
+		    <% end -%>
+      </span>      
+      <span class="all">
+      <a href="#" onclick="check_all_vehicle_makes();">
+        <%= t(:Select_All) %>
+      </a>
+    </span>
+    </h2>
+    
+		<% form_tag(select_category_vehicles_path) do %>
+			<% count = ((@vehicle_make.size)/3) %>
+			
+			<% a=[] %>
+			<% @vehicle_make.each_slice(count) do |make| a<<make end %>
+			<% if a.size > 3 
+				a[2] = a[2]+ a[3]
+				a[3] = nil
+				a.compact!
+				end
+			%>
+			
+			<%# @vehicle_make.each_slice(count) do |make_array| %>
+			<% counter = 1 %>
+			<% for make_array in a %>
+			<div style ="float:left; width:165px;" class = '<%= "counter_#{counter}" %>'>
+				<%# for make in @vehicle_make -%>
+				<% for make in make_array -%>
+				<h3>
+					<%= check_box_tag "vehicle_makes[]", make.id, false, {:class => 'make_chechboxes'} %><%= make.name %>
+				</h3>
+				<% end -%>
+				<% counter = counter + 1 %>
+			</div>
+			<% end %>
+			<div style ="clear:both;"></div>
+			<div class="postalCode">
+			<div class="enterCode">
+			    <p>
+				<% if logged_in? %>
+				<span class="required"><%= t(:Enter_postal_code) %></span> : &nbsp;&nbsp;<%= text_field_tag "zipcode", current_user.zipcode %>
+				<% else %>
+				<span class="required"><%= t(:Enter_postal_code) %> </span>: &nbsp;&nbsp;<%= text_field_tag "zipcode" %>
+				<% end %>
+				</p>
+				<p class="requiredFeild">(<img src="/images/required.png" alt=""/>required fields)  </p>
+			</div>	
+			
+				<div class="button carMakesButton"><span></span>
+				    <%= submit_tag t(:Next), :class => 'submit' %>
+			    </div>
+			</div>	
+		<% end %>
+  </div>
+</div>

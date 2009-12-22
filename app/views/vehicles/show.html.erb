@@ -1,0 +1,96 @@
+<!-- <h1>Vehicle Details</h1> -->
+
+<div class="showImage">
+	<div class="largeImage">
+		<%= image_tag(@vehicle.vehicle_main_image, :alt => "", :id => "main_img") %>
+	</div>      
+	<div class="smallImage">
+		<% unless @vehicle.vehicle_photos.empty? %>
+			<% for photo in @vehicle.vehicle_photos -%>
+				<%= image_tag(photo.public_filename(:thumb), :alt=>"", :width=>"75", :onmouseover => "javascript: document.getElementById('main_img').src = '#{photo.public_filename(:large)}' ") -%>
+			<% end -%>
+		<% end %>
+	</div>      
+</div>  
+ 
+<div class="carDetails">
+	<h2 class="fl"><%= @vehicle.model_year %> <%= @vehicle.vehicle_make.name %> <%= @vehicle.vehicle_model.name %> <%= @vehicle.trim %></h2>
+	<% if current_user && current_user.is_buyer? && params[:saved] && params[:saved] == 'true' %>
+		<div class="buttonBar fr">
+  	<%= button_to t(:Back_to_Saved_Vehicles_List), vehicle_history_users_path, :class => "simpleBotton" %>
+	<% elsif session[:min_price] != nil -%>
+   <div class="buttonBar fr">
+   	<%= button_to t(:Back_to_Search_Results), search_result_vehicles_path, :class => "simpleBotton" %>
+   	<%# if session[:clearance_center] == true %>
+   	<%#= button_to "Refine Search", clearance_center_vehicles_path, :class => "simpleBotton", :method => :get %>
+   	<%# else %>
+   	<%#= button_to "Refine Search", used_car_vehicles_path, :class => "simpleBotton", :method => :get %>
+   	<%# end %>
+   </div>
+  <% end -%>  
+  <div class="winButtons">
+		<div class="print_vehicle_detail" onclick="window.print();"><span><%= t(:Print) %></span></div>
+		<% if current_user && current_user.is_buyer? && !@vehicle.already_saved(current_user.id) -%>
+			<div id="save_vehicle_history"><%= link_to t(:Save), save_history_vehicle_path(@vehicle) %>
+			</div>
+		<% end -%>
+	</div>
+	<div style="clear: both"></div>
+	<div class="block">
+		<p><span class="label"><%= t(:Price) %>:</span><%= number_to_currency(@vehicle.price, :precision => 2) %></p>
+		<p><span class="label"><%= t(:Body_Style) %>:</span><%= @vehicle.body_styles %></p>
+		<p><span class="label"><%= t(:Odometer) %>:</span><%= @vehicle.mileage %></p>
+		<p><span class="label"><%= t(:Exterior_Colour) %>:</span><%= @vehicle.try(:exterior_color) %></p>
+		<p><span class="label"><%= t(:Interior_Colour) %>:</span><%= @vehicle.try(:interior_color) %></p>
+		<p><span class="label"><%= t(:VIN) %>:</span><%= @vehicle.vin %></p>
+	</div>  
+	
+	<div class="block fr">
+		<p><span class="label"><%= t(:Body_Style) %>:</span><%= @data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Body Style'}.compact.first %></p>
+		<p><span class="label"><%= t(:Engine) %>:</span><%= @data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Engine Type'}.compact.first %></p>
+		<p><span class="label"><%= t(:Transmission) %>:</span><%= @data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Transmission-long'}.compact.first %></p>
+		<p><span class="label"><%= t(:Fuel) %>:</span><%= @vehicle.try(:fuel) %></p>
+	</div>
+	
+	<div class="description">   
+		<h2><%= t(:Description) %>:</h2>
+		<p>
+			<%= @vehicle.dealer_comment %>
+			<%= @vehicle.comma_separated_optional_features %>.
+		</p>
+	</div>
+	
+	<div class="block contact">
+		<h2><%= t(:Dealer_Information) %></h2>
+		<%= image_tag(@vehicle.dealer.dealer_logo.public_filename(:thumb)) if @vehicle.dealer.dealer_logo %>
+		<p><%= @vehicle.dealer.dealership_name %></p>
+		<p><span class="label"><%= @vehicle.dealer.try(:phone_number) %></span></p><br />
+		<p><%= @vehicle.dealer.try(:address) %> <%= @vehicle.dealer.try(:city) %> <%= @vehicle.dealer.try(:province) %>, <%= @vehicle.dealer.try(:postal_code) %></p>
+		<p><%= "%.2f" %"#{@vehicle.distance_from(@loc) rescue 0}" %> <%= t(:Kms) %></p>
+
+		<p><%= link_to t(:See_all_dealer_inventory), show_by_dealer_path(@vehicle.dealer) %>&nbsp;&nbsp;&nbsp; 
+			<!-- <a href="javascript:void(0);" id="disclaimer" >View Disclaimer</a> -->
+			<%= render :partial => 'vehicle_disclaimer' %>
+		</p>
+	</div>
+	
+	<%= render :partial => 'coupon' %>
+	
+</div>   
+<div class="specification">
+	<%= render :partial => "admin/vehicles/specification", :locals => {:data => @data} %>
+</div>
+<div class="specification standerFeature">
+	<%= render :partial => "admin/vehicles/standard_features" %>
+</div>
+<% unless @optional_features.nil? -%>
+	<div class="specification">
+		<%= render :partial => "list_optional_features" %>
+	</div>
+<% end -%>
+<% unless @other_features.nil? -%>
+	<div class="specification">
+		<%= render :partial => "list_other_features" %>
+	</div>
+<% end -%>
+        

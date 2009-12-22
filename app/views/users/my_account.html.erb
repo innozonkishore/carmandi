@@ -1,0 +1,28 @@
+<% if current_user.is_dealer? -%>
+
+	<div class="actions">
+		<%= link_to t(:upload_vehicle), new_vehicle_path(:user_id => current_user.id), :class => 'new action' %>
+	</div>
+	<br />
+	<div class="actions">
+		<%= link_to t(:vehicles_uploaded_by_me), uploaded_vehicles_users_path, :class => 'new action' %>
+	</div>
+	<br />
+	<div class="actions">
+		<%= link_to t(:Manage_Coupons), coupons_path(:dealer_id => current_user.id), :class => 'new action' %>
+	</div>
+	
+<% elsif current_user.is_private_seller? %>
+
+	<div class="actions">
+		<%= link_to t(:Ads), manage_ads_user_path(current_user), :class => 'new action' %>
+	</div>
+	<br />
+	
+<% elsif current_user.is_buyer? %>
+
+	<div class="action">
+		<%= link_to t(:Saved_Vehicles), vehicle_history_users_path %>
+	</div>
+
+<% end -%>

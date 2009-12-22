@@ -1,0 +1,41 @@
+<div class="rightbar">   
+	<h2><%= t(:Useful_Links) %></h2>
+	<ul>
+		<% for link in Link.useful_active.all %>
+		<% if controller.controller_path == 'admin/links' && params[:id] == "#{link.id}" %><li class="active"><% else %><li><% end %>
+			<% if @english == true %>
+				<%= link_to link.name_english, links_path(link) %>
+			<% elsif @hindi == true %>
+				<%= link_to link.name_hindi, links_path(link) %>
+			<% elsif @urdu == true %>
+				<%= link_to link.name_urdu, links_path(link) %>
+			<% elsif @punjabi == true %>
+				<%= link_to link.name_punjabi, links_path(link) %>
+			<% end %>
+		</li>
+		<% end %>
+	</ul>
+	<br />
+	<!-- <h2>ADS here</h2> -->
+	<ul>
+		<div class="ads">
+			<% if current_page?(:controller => 'home', :action => 'index') || @main_ads == true %>
+				<%= render :partial => 'shared/rightbar_ad', :locals => {:ad_page => 'rightbar_home'} %>
+			<% elsif @new_car == true -%>
+				<%= render :partial => 'shared/rightbar_ad', :locals => {:ad_page => 'rightbar_new_car'} %>
+			<% elsif session[:clearance_center] == nil && @used_car == true %>
+				<%= render :partial => 'shared/rightbar_ad', :locals => {:ad_page => 'rightbar_used_car'} %>
+			<% elsif @clearance_center == true %>
+				<%= render :partial => 'shared/rightbar_ad', :locals => {:ad_page => 'rightbar_clearance_center'} %>
+			<% elsif @private_sales == true %>
+				<%= render :partial => 'shared/rightbar_ad', :locals => {:ad_page => 'rightbar_private_sales'} %>
+			<% elsif @sell_your_car == true %>
+				<%= render :partial => 'shared/rightbar_ad', :locals => {:ad_page => 'rightbar_sell_your_car'} %>
+			<% elsif @show_link == true && @link %>
+				<%= render :partial => 'shared/rightbar_ad', :locals => {:ad_page => 'rightbar_'+@link.name_english } %>
+			<% elsif @calculator == true %>
+				<%= render :partial => 'shared/rightbar_ad', :locals => {:ad_page => 'rightbar_monthly_payment_calculator' } %>
+			<% end -%>
+		</div>    
+	</ul>
+</div>

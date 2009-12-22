@@ -1,0 +1,13 @@
+<% if coupon = @vehicle.dealer.try(:primary_coupon) -%>
+	<div style="position: relative; overflow: visible;">
+		<div class="dealer_coupon">
+			<p class='label'><%= coupon.name %></p>
+			<p class='dealer_coupon_image' onmouseover="show_coupon('<%= coupon.id %>');"><%= image_tag(coupon.public_filename(:large)) %></p>
+			<p><a onclick='print_coupon("<%= coupon.public_filename %>");' onmouseover="change_cursor();" onmouseout="change_cursor_again();"><%= t(:Print_Coupon) %></a></p>
+			<p><%= link_to t(:See_more_coupons), coupon_list_coupons_path(:coupon_id => coupon.id, :vehicle_id => @vehicle.id) %></p>
+		</div>
+		<div class="hidden_coupon" id="coupon_image_<%= coupon.id %>" onmouseout="hide_coupon('<%= coupon.id %>');">
+			<%= image_tag coupon.public_filename(:hover) %>
+		</div>
+	</div>
+<% end -%>

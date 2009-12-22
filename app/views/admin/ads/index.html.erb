@@ -1,0 +1,88 @@
+<% if @ads.blank? %>
+<div class = "admin_links">
+  <p>
+    <%= t(:no_ad_yet) %> 
+  </p>
+  <p>
+    <%= t(:try_creating_one_now) %> <%=link_to t(:clicking_here), new_admin_ad_path %>
+  </p>
+</div>
+<% else %>
+<div class="active-scaffold active-scaffold-as_admin__representative admin/representative-view default-theme" id="as_admin__representative-active-scaffold">
+  <div class="active-scaffold-header">
+    <div class="actions">
+      <%=link_to t(:create_new), new_admin_ad_path, :class => 'new action' %>
+ 		</div>
+    <div>
+      <%=link_to t(:Specify_Location), specify_location_admin_ads_path, :class => 'new action' %>
+ 		</div>
+    <div>
+      <%=link_to t(:View_ad_display_locations), view_ad_location_admin_ads_path, :class => 'new action' %>
+ 		</div>
+    <h2>
+      <%= t(:Ads) %>
+    </h2>
+  </div>
+	
+  <div id="as_admin__dealer-content">
+    <table cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th title="">
+            <a>
+              <%= t(:Ad_name) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Advertiser_name) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Ad_type) %>
+            </a>
+          </th>
+          <th class="actions">
+          </th>
+        </tr>
+      </thead>
+      <tbody id="as_admin__representative-tbody" class="records">
+        <% for ads in @ads %>
+        <tr id="as_admin__representative-list-3-row" class="record" >
+          <td class="">
+						<%= ads.ad_name %>
+          </td>
+          <td>
+						<%= ads.advertiser_name %>
+          </td>
+          <td>
+						<%= ads.ad_type %>
+          </td>
+          <td class="actions">
+            <table cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td class="indicator-container">
+                    <img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif?1250079352" id="as_admin__representative-record-3-loading-indicator" class="loading-indicator" alt="loading indicator"/>
+                  </td>
+                  <td>
+                    <%= link_to t(:Edit), edit_admin_ad_path(ads) %>
+                  </td>
+                  <td>
+                    <%= link_to t(:Show), admin_ad_path(ads) %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%#= will_paginate @ads %>
+
+<% end %>

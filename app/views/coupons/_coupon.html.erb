@@ -1,0 +1,12 @@
+<div class="relative_hover_class">
+	<div class="coupon_list">
+		<p class='label'><%= coupon.name %></p>
+		<p class='dealer_coupon_image' onmouseover="show_coupon('<%= coupon.id %>');"><%= image_tag(coupon.public_filename(:thumb)) %></p>
+		<p><a onclick='print_coupon("<%= coupon.public_filename %>");' onmouseover="change_cursor();" onmouseout="change_cursor_again();"><%= t(:Print_Coupon) %></a></p>
+	</div>
+	<div class="hidden_coupons adminCoupon" id="coupon_image_<%= coupon.id %>" onmouseout="hide_coupon('<%= coupon.id %>');">
+		<%= image_tag coupon.public_filename(:hover) %>
+	</div>
+</div>
+
+

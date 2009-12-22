@@ -1,0 +1,9 @@
+<h2><%= t(:Optional_Features) %></h2>
+
+<% for of in @optional_features %>
+
+<p class="<%= cycle('even','') %>">
+	<span><%= of %></span>
+</p>
+
+<% end %>

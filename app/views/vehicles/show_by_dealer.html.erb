@@ -1,0 +1,22 @@
+<div style ="height:150px;">
+	<div style="float:left;width:150px;"><h2>Contact Dealer</h2>
+		<%= image_tag(@dealer.dealer_logo.public_filename(:thumb), :height=>"100", :width=>"120") if @dealer.dealer_logo %>
+	</div>
+	<div style="float:left;width:150px;">
+	<p><h2><%= @dealer.dealership_name %></h2></p>
+	<p><%= @dealer.address %></p>
+	<p><%= t(:Phone) %>: <%= @dealer.user.try(:phone_number) %></p>
+	<p><%= @dealer.user.try(:fax_number) %></p>
+	</div>
+	<div style="float:left;width:150px;">
+		<% unless @dealer.vehicles.empty? -%>
+			<%= "%.2f" %"#{@dealer.vehicles.first.distance_from(@loc)}" %> Kms
+		<% end -%>
+	</div>
+	<div style = "float:right;">
+		<%= link_to t(:Visit_the_dealers_website), @dealer.website_url.ensure_url, :popup => true %>
+	</div>
+	<br />
+</div>
+
+<%= render :partial => 'searched_vehicles' %>

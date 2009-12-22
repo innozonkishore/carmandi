@@ -1,0 +1,89 @@
+<%= t(:Edit_Private_Vehicle) %>
+
+<br /><br />
+
+<% form_for @vehicle, :url => {:controller => 'admin/private_vehicles', :action => 'update'} do |f| %>
+<div>
+  <%= label_tag 'vin' %>
+  <%= f.text_field :vin %>
+</div>
+<div>
+  <%= label_tag 'vehicle_make' %>
+  <%= @vehicle.vehicle_make.name %>
+</div>
+<div>
+  <%= label_tag 'model' %>
+  <%= f.text_field :model %>
+</div>
+<div>
+  <%= label_tag 'category_id', t(:Body_Style) %>
+	<%= f.select :category_id, Category.find(:all).collect {|c| [ c.name, c.id ]} %>
+</div>
+<div>
+  <%= label_tag 'days', t(:Listing_time_since_create) %>
+  <%= f.text_field :days %> days
+</div>
+<div>
+  <%= label_tag 'fuel' %>
+  <%= f.select :fuel, UnsupportedVehicle::FUEL %>
+</div>
+<div>
+  <%= label_tag 'doors' %>
+  <%= f.text_field :doors %>
+</div>
+<div>
+  <%= label_tag 'engine_type' %>
+  <%= f.text_field :engine_type %>
+</div>
+<div>
+  <%= label_tag 'trim' %>
+  <%= f.text_field :trim %>
+</div>
+<div>
+  <%= label_tag 'transmission' %>
+  <%= f.text_field :transmission %>
+</div>
+<div>
+  <%= label_tag 'mileage' %>
+  <%= f.text_field :mileage %>
+</div>
+<div>
+	<%= label_tag 'drive' %>
+	<%= f.select :drive, UnsupportedVehicle::DRIVE %>
+</div>
+<div>
+  <%= label_tag 'exterior_color' %>
+  <%= f.text_field :exterior_color %>
+</div>
+<div>
+  <%= label_tag 'interior_color' %>
+  <%= f.text_field :interior_color %>
+</div>
+<div>
+  <%= label_tag 'amount_collected' %>
+  <%= f.text_field :amount_collected %>
+</div>
+<div>
+  <%= label_tag 'asking_price' %>
+  <%= f.text_field :asking_price %>
+</div>
+<div>
+  <%= t(:Additional_Vehicle_Details) %>
+	<br />
+  <%= f.text_area :detailed_info, :rows => 5, :cols => 50 %>
+</div>
+<div>
+	<%= label_tag 'status' %>
+	<%= f.select :status, Vehicle::STATUS %>
+</div>
+<div>
+	<%= t(:Add_Vehicle_Options) %><br />
+	<%= render :partial => 'private_vehicles/vehicle_options' %>
+</div>
+<!-- <p>
+	<%#= image_tag vehicle.photos.first.public_filename(:thumb), :align => :absmiddle unless vehicle.photos.empty? %>
+</p> -->
+<%= submit_tag t(:Save) %>
+
+
+<% end %>

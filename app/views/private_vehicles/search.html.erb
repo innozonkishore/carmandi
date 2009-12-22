@@ -1,0 +1,44 @@
+<!-- <h1><%#= t(:Private_Vehicles) %></h1> -->
+<div class="selectCar">
+	<h2>
+	    <span class="fl"><%= t(:Price_Ranges) %></span>
+	    <span class="usedcarCenter"><%= t(:Private_Vehicles) %></span>
+	</h2>
+
+	<% form_tag(listing_private_vehicles_path) do -%>
+
+	<ul class="priceRange">
+		<li><a href="#" onclick="select_price_range(0,10000); return false;">Under $10,000</a></li>
+		<li><a href="#" onclick="select_price_range(10000,20000); return false;">$10,000 - $20,000</a></li>
+		<li><a href="#" onclick="select_price_range(20000,30000); return false;">$20,000 - $30,000</a></li>
+		<li><a href="#" onclick="select_price_range(30000,40000); return false;">$30,000 - $40,000</a></li>
+		<li><a href="#" onclick="select_price_range(40000,50000); return false;">$40,000 - $50,000</a></li>
+		<li><a href="#" onclick="select_price_range(50000,50000); return false;">Over $50,000</a></li>
+		<li><a href="#" onclick="select_price_range(0,0); return false;">All Prices</a></li>
+	</ul>  
+	<div class="priceForm">
+		<h3><%= t(:enter_price_range) %></h3>
+		<form>
+			<div>
+				<label><%= t(:Price) %></label>
+				<%= text_field_tag 'min_price', nil, :class => 'textbox small', :id => 'min_price' %>
+				<label class="ml10"><%= t(:to) %></label>
+				<%= text_field_tag 'max_price', nil, :class => 'textbox small', :id => 'max_price' %>
+			</div>
+			<p class="button mt10"><span></span><%= submit_tag "Search Vehicles", :class => "submit" %></p>
+		</form>      
+	</div>
+
+	<div style ="clear:both;"></div>
+	<div class="enterCode">
+		<% if logged_in? %>
+		<span class="required"><%= t(:Enter_postal_code) %></span> : &nbsp;&nbsp;<%= text_field_tag "zipcode", current_user.zipcode %>
+		<% else %>
+		<span class="required"><%= t(:Enter_postal_code) %></span> :&nbsp;&nbsp; <%= text_field_tag "zipcode" %>
+		<% end %>
+	</div>
+	<p class="requiredFeild">(<img src="/images/required.png" alt=""/>required fields)  </p>
+	
+	<% end -%>
+	
+</div>

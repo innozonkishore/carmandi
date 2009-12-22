@@ -1,0 +1,63 @@
+<div class="showImage">
+	<div class="largeImage">
+		<%= image_tag(@vehicle.vehicle_main_image, :id => "main_img") %>
+	</div>      
+	<div class="smallImage">
+		<% unless @vehicle.photos.empty? %>
+			<% for photo in @vehicle.photos -%>
+				<%= image_tag(photo.public_filename(:thumb), :alt=>"", :width=>"75", :onmouseover => "javascript: document.getElementById('main_img').src = '#{photo.public_filename(:large)}' ") -%>
+			<% end -%>
+		<% end %>
+	</div>      
+</div>      
+<div class="carDetails">
+	<h2><%= @vehicle.model_year %> <%= @vehicle.vehicle_make.name %> <%= @vehicle.vehicle_model %> <%= @vehicle.trim %></h2>
+	<% if current_user && current_user.is_buyer? && params[:saved] && params[:saved] == 'true' %>
+		<div class="buttonBar fr">
+  	<%= button_to t(:Back_to_Saved_Vehicles_List), vehicle_history_users_path, :class => "simpleBotton" %>
+	<% elsif session[:min_price] != nil -%>
+    <div class="buttonBar fr">
+    	<%= button_to t(:Back_to_Search_Results), listing_private_vehicles_path, :class => "simpleBotton" %>
+		</div>
+	<% end -%>
+	<div class="print_vehicle_detail" onclick="window.print();"><span><%= t(:Print) %></span></div>
+	<% if current_user && current_user.is_buyer? && !@vehicle.already_saved(current_user.id) -%>
+		<div id="save_vehicle_history"><%= link_to t(:Save), save_history_private_vehicle_path(@vehicle) %>
+		</div>
+	<% end -%>
+	<div class="block">
+		<p><span class="label"><%= t(:Price) %>:</span><%= number_to_currency(@vehicle.asking_price, :precision => 2) %></p>
+		<p><span class="label"><%= t(:Body_Style) %>:</span><%= @vehicle.category.try(:name) %></p>
+		<p><span class="label"><%= t(:Odometer) %>:</span><%= @vehicle.mileage %></p>
+		<p><span class="label"><%= t(:Exterior_Colour) %>:</span><%= @vehicle.exterior_color %></p>
+		<p><span class="label"><%= t(:Interior_Colour) %>:</span><%= @vehicle.interior_color %></p>
+		<p><span class="label"><%= t(:VIN) %>:</span><%= @vehicle.vin %></p>
+	</div>  
+	
+	<div class="block fr">
+		<p><span class="label"><%= t(:Drive) %>:</span><%= @vehicle.drive %></p>
+		<p><span class="label"><%= t(:Engine_Type) %>:</span><%= @vehicle.engine_type %></p>
+		<p><span class="label"><%= t(:Transmission) %>:</span><%= @vehicle.transmission %></p>
+		<p><span class="label"><%= t(:Fuel) %>:</span><%= @vehicle.fuel %></p>
+	</div>
+	
+	<div class="description">   
+		<h2><%= t(:Description) %>:</h2>
+		<p><%= @vehicle.detailed_info %></p>
+	</div>
+	
+	<div class="block contact">
+		<h2><%= t(:Seller_contact_number) %></h2>
+		<%= @vehicle.seller.try(:phone_number) %>
+	</div>
+</div>
+<% unless @vehicle.options.nil? %>
+	<div class="specification standerFeature">
+		<h2><%= t(:Other_features_available_in_the_Vehicle) %></h2>
+		<div class="<%= cycle('even','') %>">
+			<% for option in @options -%>
+				<p><span><%= option %></span></p>
+			<% end -%>
+		</div>
+	</div>
+<% end %>

@@ -1,0 +1,75 @@
+<% if @coupons.blank? %>
+<div>
+	<p>
+		<%= t(:no_coupon_yet) %> 
+	</p>
+	<p>
+		<%= t(:try_creating_one_now) %> <%=link_to t(:clicking_here), new_coupon_path %>
+	</p>
+</div>
+<% else %>
+<div>
+	<div>
+		<div class="actions">
+			<%=link_to t(:create_new), new_coupon_path, :class => 'new action' %>
+		</div>		
+		<br /><br />
+	</div>
+
+	<div>
+		<table cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th title="">
+						<a>
+							<%= t(:Name) %>
+						</a>
+					</th>
+					<th title="">
+						<a>
+							<%= t(:Filename) %>
+						</a>
+					</th>
+					<th title="">
+						<a>
+							<%= t(:Status) %>
+						</a>
+					</th>
+					<th>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for coupon in @coupons %>
+				<tr>
+					<td class="">
+						<%= coupon.name %>
+					</td>
+					<td>
+						<%= coupon.filename %>
+					</td>
+					<td>
+						<%= coupon.status %>
+					</td>
+					<td class="actions">
+						<table cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<td class="indicator-container">
+										<img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif?1250079352" id="as_admin__representative-record-3-loading-indicator" class="loading-indicator" alt="loading indicator"/>
+									</td>
+									<td>
+										<%= link_to t(:Edit), edit_coupon_path(coupon) %>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<% end %>

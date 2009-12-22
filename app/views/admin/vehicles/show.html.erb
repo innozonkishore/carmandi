@@ -1,0 +1,33 @@
+<div class="showImage">
+	<div class="largeImage">
+		<%= image_tag(@vehicle.vehicle_main_image, :alt => "", :id => "main_img") %>
+	</div>      
+	<div class="smallImage">
+		<% unless @vehicle.vehicle_photos.empty? %>
+			<% for photo in @vehicle.vehicle_photos -%>
+				<%= image_tag(photo.public_filename(:thumb), :alt=>"", :width=>"75", :onmouseover => "javascript: document.getElementById('main_img').src = '#{photo.public_filename(:large)}' ") -%>
+			<% end -%>
+		<% end %>
+	</div>      
+</div>      
+<div class="carDetails">
+	<h2><%= @vehicle.model_year %> <%= @vehicle.vehicle_make.name %> <%= @vehicle.vehicle_model.name %> <%= @vehicle.trim %></h2>
+	<div class="block">
+		<p><span class="label"><%= t(:Price) %>:</span><%= number_to_currency(@vehicle.price, :precision => 2) %></p>
+		<p><span class="label"><%= t(:Body_Style) %>:</span><%= @vehicle.body_styles %></p>
+		<p><span class="label"><%= t(:Odometer) %>:</span><%= @vehicle.mileage %></p>
+		<p><span class="label"><%= t(:Exterior_Colour) %>:</span><%= @vehicle.try(:exterior_color) %></p>
+		<p><span class="label"><%= t(:Interior_Colour) %>:</span><%= @vehicle.try(:interior_color) %></p>
+		<p><span class="label"><%= t(:VIN) %>:</span><%= @vehicle.vin %></p>
+	</div>
+	
+	<div class="block contact">
+		<h2><%= t(:Contact_Dealer) %></h2>
+		<%= image_tag(@vehicle.dealer.dealer_logo.public_filename(:thumb)) if @vehicle.dealer.dealer_logo %>
+		<p><%= @vehicle.dealer.dealership_name %></p>
+		<p><span class="label"><%= @vehicle.dealer.user.try(:phone_number) %></span></p><br />
+		<p><%= @vehicle.dealer.user.try(:fax_number) %></p>
+		<p><%= @vehicle.dealer.address %></p>
+		<p><%= link_to t(:See_all_dealer_inventory), show_by_dealer_path(@vehicle.dealer) %></p>
+	</div>
+</div>

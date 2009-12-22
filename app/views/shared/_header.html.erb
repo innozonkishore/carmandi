@@ -1,0 +1,47 @@
+<h1>
+	<a href='/'>
+		<%= t(:carmandi) %>
+	</a>
+</h1>
+<div class="right">
+	<div class="user">
+		<p>
+			<% if logged_in? -%>
+			<%= t(:Welcome) %> 
+			<span class="bold">
+				<%= current_user.firstname %>!
+			</span>
+			<% if current_user.is_dealer? || current_user.is_private_seller? || current_user.is_buyer? %>
+			|
+			<span>
+				<%= link_to t(:my_account), my_account_users_path  %>
+			</span>
+			<% end %>
+			|
+			<a href="">
+				<%= link_to t(:Logout), logout_path %>
+			</a>
+			<% else -%>
+			<span>
+				<%= link_to t(:signup), buyer_signup_users_path %>
+			</span> | 
+			<%= link_to t(:Login), login_path %>
+			<% end -%>
+		</p>
+	</div>
+	<div class="flag">
+		<%#= select_tag "language", options_for_select(LANGUAGES, ""), :onchange => "lang_index = this.value; window.location='#{change_language_home_path}?lang='+lang_index" %>
+		<%= select_tag "language", options_for_select(LANGUAGES, ""), :onchange => "lang_index = this.value; window.location='#{change_language_home_path}?lang='+lang_index+'&current_url='+document.location" %>
+	</div>
+	<p>
+		<%= t(:Language) %> 
+		<span>
+			<%#= I18n.locale %>
+			<% if session[:locale].blank? %>
+				<%= t(:english) %>
+			<% else %>
+				<%= session[:locale].titleize %>
+			<% end %>
+		</span>
+	</p>
+</div>

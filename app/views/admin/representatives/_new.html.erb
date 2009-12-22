@@ -1,0 +1,60 @@
+<%= error_messages_for :user %>
+<% if @user.new_record? %>
+<% @user.password = @user.password_confirmation = nil %>
+<% target = admin_representatives_path  %>
+<% method = 'post' %>
+<% else -%>
+<% target = admin_representative_path(@user) %>
+<% method = 'put' %>
+<% end %>
+<div class="adminForm">
+<% form_for @user, :url => target, :method => method do |f| -%>
+
+<div class="even"><%= label_tag 'firstname' %><%= f.text_field :firstname %></div>
+
+<div><%= label_tag 'lastname' %><%= f.text_field :lastname %></div>
+
+<div class="even"><%= label_tag 'address' %><%= f.text_field :address %></div>
+
+<div><%= label_tag 'zipcode', t(:Postal_code) %><%= f.text_field :zipcode %></div>
+
+<div class="even"><%= label_tag 'phone_number' %><%= f.text_field :phone_number %></div>
+
+<div><%= label_tag 'email' %><%= f.text_field :email %></div>
+
+<div class="even"><%= label_tag 'password' %><%= f.password_field :password %></div>
+
+<div><%= label_tag 'password_confirmation', t(:Confirm_Password) %><%= f.password_field :password_confirmation %></div>
+
+<div class="even"><%= label_tag 'status' %><%= f.select :active, User::STATUS %></div>
+
+<% if @user.new_record? -%>
+<%= hidden_field :user, :role_id, :value => representative_role_id %>
+<% end -%>
+
+<div>
+    
+	<% fields_for :permission do |p| %>
+	<%= p.check_box :category %> <%= t(:Category) %>
+	<%= p.check_box :vehicle_make %> <%= t(:Vehicle_make) %>
+	<%= p.check_box :vehicle_model %> <%= t(:Vehicle_model) %>
+	<%= p.check_box :create_dealer %> <%= t(:Create_dealer) %>
+	<%= p.check_box :modify_dealer %> <%= t(:Modify_dealer) %>
+	<%= p.check_box :upload_vehicle %> <%= t(:Upload_vehicle) %>
+	<%= p.check_box :modify_vehicle %> <%= t(:Modify_vehicle) %>
+	<%= p.check_box :view_vehicle_list %> <%= t(:View_vehicle_list) %>
+	<%= p.check_box :vehicle_trim_types %> <%= t(:vehicle_trim_types) %>
+	<%= p.check_box :add_link %> <%= t(:Add_link) %>
+	<%= p.check_box :add_listing %> <%= t(:Add_listing) %>
+	<% end %>
+</div>
+
+<div><label>&nbsp;</label>
+	<% if @user.new_record? -%>
+<span class="button"><span>&nbsp;</span><%= submit_tag t(:Create_representative) , :class => 'submit' %></span>
+<% else -%>
+<%= submit_tag t(:Save) %>
+<% end -%>
+</div>
+<% end -%>
+</div>

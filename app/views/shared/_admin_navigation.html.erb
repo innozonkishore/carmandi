@@ -1,0 +1,22 @@
+<% if logged_in? and ( current_user.is_representative? or current_user.is_admin?) %>		
+        <div class="subNav">
+          <b>
+            <%= t(:Admin_Menu) %>:
+          </b>
+          <%= link_to t(:Categories), admin_categories_path, :class =>'admin_links' if current_user.has_permission?('category') %>
+          <%= link_to t(:Makes), admin_make_index_path, :class =>'admin_links' if current_user.has_permission?('vehicle_make') %>
+          <%= link_to t(:Models), admin_models_path, :class =>'admin_links' if current_user.has_permission?('vehicle_model') %>
+          <%#= link_to t(:Vehicle_Trim_Types), admin_trim_types_path, :class =>'admin_links' if current_user.has_permission?('vehicle_trim_types') %>
+          <%= link_to t(:Representatives), admin_representatives_path, :class =>'admin_links' if current_user.is_admin? %>
+          <%= link_to t(:Dealers), admin_dealers_path, :class =>'admin_links' if current_user.has_permission?('create_dealer') %>
+					<%= link_to t(:Vehicles), admin_vehicles_path, :class => 'admin_links' if current_user.has_permission?('view_vehicle_list') %>
+					<%= link_to t(:Private_Vehicles), admin_private_vehicles_path, :class =>'admin_links' if current_user.is_admin? %>
+          <%= link_to t(:Add_link), admin_links_path, :class =>'admin_links' if current_user.has_permission?('add_link') %>
+					<%= link_to t(:Add_listing), listing_index_admin_links_path, :class =>'admin_links' if current_user.has_permission?('add_listing') %>
+					<%= link_to t(:Manage_ad), admin_ads_path, :class =>'admin_links' if current_user.has_permission?('manage_ad') %>
+					<%= link_to t(:Manage_Coupons), admin_coupons_path, :class =>'admin_links' %>
+					
+					<%= link_to t(:Logout), logout_path if logged_in? %>
+        </div>
+
+<% end %>

@@ -1,0 +1,56 @@
+<% if @new == false -%>
+	<p>
+		<%= t(:Select_dealership_from_list) %>:
+		<br />
+		<% Dealer.all.each do |dealer| %>
+				<%= link_to dealer.dealership_name, new_admin_coupon_path(:dealer_id => dealer.id) %><br />
+		<% end %>
+	</p>
+	
+	<h2><%= t(:OR) %></h2>
+	
+	<p>
+		<%= t(:Select_listing_from_list) %>:
+		<br />
+		<% Listing.active_and_inactive.each do |listing| %>
+			<%= link_to listing.name, new_admin_coupon_path(:listing_id => listing.id) %><br />
+		<% end	%>
+	</p>
+<% else -%>
+
+	<% form_for [:admin, @coupon], :html => {:multipart => :true} do |f| -%>
+		<%= error_messages_for :coupon %>
+
+	<div class="formFeild"><label><%= t(:Coupon_Name) %></label>
+		<%= text_field_tag "coupon_name", nil, :size => 30 %>
+	</div>
+	
+	<div class="formFeild">	
+		<label><%= t(:Coupon_Image) %></label>
+		<%= file_field_tag :image, :size => 30 %>
+	</div>
+	
+	<div class="formFeild">
+		<% if @dealer %>
+			<label><%= t(:Dealership) %></label>
+			<span class='name'><%= @dealer.dealership_name %></span>
+		<% elsif @listing %>
+			<label><%= t(:Listing) %></label>
+			<span class='name'><%= @listing.name %></span>
+		<% end %>
+	</div>
+	
+	<p>
+		<% if @dealer %>
+			<%= hidden_field_tag 'dealer', @dealer.id %>
+		<% elsif @listing %>
+			<%= hidden_field_tag 'listing', @listing.id %>
+		<% end %>
+	</p>
+	<div class="formFeild">
+		<label>&nbsp;</label>
+		<div class="button"><span>&nbsp;</span><%= f.submit t(:Create) , :class=>'submit'%></div>
+	</div>
+	<% end -%>
+
+<% end -%>

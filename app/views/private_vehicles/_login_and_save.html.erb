@@ -1,0 +1,13 @@
+<h1><%= t(:Log_in) %></h1>
+
+<%# form_tag sell_your_car_post_ad_thankyou_path(:existing_user=>'existing'), :method => :post do -%>
+
+<div ><%= label_tag 'email' %>    <%= text_field_tag 'login_email', nil , :class=> "textbox"%></div>
+<div><%= label_tag 'password' %>    <%= password_field_tag 'login_password', nil, :class=> "textbox" %></div>    
+<div>
+	<div class="rightLabel"><%= link_to t(:forgot_password), forgot_path, :class=>"forgot" %></div>
+</div>    
+<!-- <div>
+	<div class="rightLabel"><div class="button"><span>&nbsp;</span><%#= submit_tag t(:Log_in) , :class=>"submit" %></div></div>
+</div> -->    
+<%# end -%>

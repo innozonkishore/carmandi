@@ -1,0 +1,30 @@
+<% if AdLocation.center_ad == false %>
+
+	<h1>Featured Car</h1>   
+	<p>Find new and used cars, buy or sell your car, compare new and used car prices &amp; values, your guide to buy new and used cars ... Your car sale is guaranteed. Find new and used cars, buy or sell your car, compare new and used car prices &amp; values, your guide to buy new and used cars ... Your car sale is guaranteed.</p>
+	<p class="more"><a href="">More...</a></p>
+	<div class="image">
+	    <img src="/images/car01.jpg" alt="" />
+	</div>
+	
+<% else %>
+
+<!-- 	<% ad_location = AdLocation.find_by_name("center_home")
+		 ad = ad_location.ad 
+	%>
+	<h1><%= ad.ad_name %></h1>
+	<p><%= ad.comments %></p>
+	<% if ad.url != '' -%>
+		<p class="more"><%= link_to t(:More), ad.url.ensure_url %></p>
+	<% end -%> -->
+	<div class="image">
+		<% if AdLocation.center_ad[0] == '0' %>
+			<%= AdLocation.center_ad[1] %>
+		<% elsif AdLocation.center_ad[0] == '1' && AdLocation.center_ad[2] %>
+			<%= link_to image_tag(AdLocation.center_ad[1]), AdLocation.center_ad[2].ensure_url, :popup => true %>
+		<% else %>
+			<%= image_tag AdLocation.center_ad[1] %>
+		<% end %>
+	</div>
+
+<% end %>

@@ -1,0 +1,13 @@
+<% if @vehicle.options.nil? -%>
+
+	<% for option in VEHICLE_OPTIONS -%>
+	<p><%= check_box_tag "options[]", option, false %> <%= option %></p>
+	<% end -%>
+
+<% else -%>
+
+	<% for option in VEHICLE_OPTIONS -%>
+	<p><%= check_box_tag "options[]", option, @vehicle.options.split(';').include?(option) %> <%= option %></p>
+	<% end -%>
+
+<% end -%>

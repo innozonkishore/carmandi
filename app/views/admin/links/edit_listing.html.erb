@@ -1,0 +1,73 @@
+<div class="listing">
+    
+<h2><%= t(:Edit_Listing) %></h2>
+
+<% form_for :listing, :url => update_listing_admin_link_path, :method => :put, :html => {:multipart => :true} do |f| -%>
+	<%= error_messages_for :listing %>
+	<div class="formFeild"><%= label_tag 'name' %> <%= f.text_field :name %></div>
+	
+	<div class="formFeild"><%= label_tag 'web_address' %> <%= f.text_field :web_address %></div>
+	
+	<div class="formFeild"><%= label_tag 'full_address' %> <%= f.text_field :full_address %></div>
+	<%= radio_button_tag "options[0]", 'full_address', @listing.display?('full_address') %> <%= t(:Display) %>
+	<%= radio_button_tag "options[0]", 0, !@listing.display?('full_address') %> <%= t(:no_display) %>
+	
+	<div class="formFeild"><%= label_tag 'contact_info' %> <%= f.text_field :contact_info %></div>
+	<%= radio_button_tag "options[1]", 'contact_info', @listing.display?('contact_info') %> <%= t(:Display) %>
+	<%= radio_button_tag "options[1]", 0, !@listing.display?('contact_info') %> <%= t(:no_display) %>
+	
+	<div class="formFeild"><%= label_tag 'description' %> <%= f.text_area :description, :rows => 5, :cols => 30 %></div>
+	<%= radio_button_tag "options[2]", 'description', @listing.display?('description') %> <%= t(:Display) %>
+	<%= radio_button_tag "options[2]", 0, !@listing.display?('description') %> <%= t(:no_display) %>
+	
+	<div class="formFeild"><%= label_tag 'position' %> <%= f.text_field :position %></div>
+	
+	<div class="formFeild"><%= label_tag 'status' %> <%= f.select :status, Link::STATUS %></div>
+	
+	<div class="formFeild"><label><%= t(:Select_Photo) %></label><%= file_field_tag 'photo', :id =>'first_file_element', :size => 30 -%></div>
+	
+	<!-- <div class="formFeild"><label><%= t(:Coupon_Name) %></label>
+	<%# if !@listing.new_record? && !@listing.coupons.empty? %>
+		<%#= text_field_tag "coupon_name", @listing.coupons.first.name, :size => 30 %>
+	<%# else %>
+		<%#= text_field_tag "coupon_name", nil, :size => 30 %>
+	<%# end %></div> -->
+	
+	<% unless @listing.coupons.empty? %>
+		<div class="formFeild"><label>
+			<%= t(:Existing_Coupons) %>
+		</label>
+		<br />
+		<% @listing.coupons.each do |coupon| %>
+			<%= coupon.name %> &nbsp;
+		<% end %>
+		</div>
+	<% else %>
+	
+	<div class="mtb10" id = "mtb10">
+	  <div id = 'new_file'>
+			<div class="formFeild"><label><%= t(:Coupon_Name) %></label>
+			<%= text_field_tag "coupon_names[]", nil, :size => 30 %></div>
+
+			<div class="formFeild"><label><%= t(:Coupon_Image) %></label>
+		
+	    <%= file_field_tag 'coupons[]', :id =>'first_file_element', :size => 30 -%>
+			</div>
+	  </div>
+	</div>
+	<a class="small grey underline" id = "small grey underline1" onclick ='attach_new_coupon();' onmouseover="change_cursor();" onmouseout='change_cursor_again();'>
+	  <%= t(:further_attach) %>
+	</a>
+	<% end %>
+
+	<!-- <div class="formFeild"><label><%= t(:Coupon_Image) %></label>
+		<%= file_field_tag :coupon, :size => 30 %>
+		<%# if !@listing.new_record? && @listing.coupon %> (<%#= @listing.coupon.filename %>) <%# end %>
+	</div> -->
+   
+  <div class="formFeild"><%= label_tag 'link_id' %><%= f.select 'link_id', Link.active_and_inactive.find(:all).collect {|l| [ l.name_english, l.id ]} %></div>
+  
+  <div class="formFeild"><label>&nbsp;</label><div class="button"><span>&nbsp;</span><%= f.submit t(:Save), :class => 'submit' %></div></div>
+	
+<% end -%>
+</div>

@@ -1,0 +1,43 @@
+<h1><%= t(:Sign_up_as_a_new_user) %></h1>
+<% @user.password = @user.password_confirmation = nil %>
+
+<%= error_messages_for :user %>
+<% form_for :user, :url => users_path do |f| -%>
+
+<p>
+	Sign up as a:<br />
+	<%= f.radio_button :role_id, dealer_role_id, {:checked => @user.role_id == dealer_role_id ? 'checked' : false} %> <%= t(:Dealer) %>
+	<%= f.radio_button :role_id, buyer_role_id, {:checked => @user.role_id == buyer_role_id ? 'checked' : false} %> <%= t(:Buyer) %>
+	<%= f.radio_button :role_id, private_seller_role_id, {:checked => @user.role_id == private_seller_role_id ? 'checked' : false} %> <%= t(:private_car_seller) %>
+	<%= f.radio_button :role_id, representative_role_id, {:checked => @user.role_id == representative_role_id ? 'checked' : false} %> <%= t(:CarMandi_Representative) %>
+</p>
+
+<p><%= label_tag 'firstname' %><br/>
+<%= f.text_field :firstname %></p>
+
+<p><%= label_tag 'lastname' %><br/>
+<%= f.text_field :lastname %></p>
+
+<p><%= label_tag 'address' %><br/>
+<%= f.text_field :address %></p>
+
+<p><%= label_tag 'phone_number' %><br/>
+<%= f.text_field :phone_number %></p>
+
+<p><%= label_tag 'username' %><br/>
+<%= f.text_field :username %></p>
+
+<p><%= label_tag 'fax_number' %><br/>
+<%= f.text_field :fax_number %></p>
+
+<p><%= label_tag 'email' %><br/>
+<%= f.text_field :email %></p>
+
+<p><%= label_tag 'password' %><br/>
+<%= f.password_field :password %></p>
+
+<p><%= label_tag 'password_confirmation', 'Confirm Password' %><br/>
+<%= f.password_field :password_confirmation %></p>
+
+<p><div class="button"><span>&nbsp;</span><%= submit_tag 'Sign up', :class=>'submit' %></div></p>
+<% end -%>

@@ -1,0 +1,19 @@
+<div class="selectCar adPlan sellCar">
+<h2><%= t(:Select_plan_option) %>:</h2>
+<div class="holder">
+<h3><%= t(:Basic_Plan) %> - <%= t(:Free) %>!</h3>
+<p><%= t(:Includes) %>:</p>
+<p><%= t(:a1_photo) %></p>
+<p><%= t(:Regular_placement) %></p>
+<p><%= t(:Runs_30_days) %></p>
+<p><%= link_to t(:Post_ad), sell_your_car_start_add_path(:plan => 'basic') %></p>
+
+<h3><%= t(:VIP_Plan) %></h3>
+<p><%= t(:Includes) %>:</p>
+<!-- <p><%= t(:Fees) %></p> -->
+<p><%= t(:a21_photos) %></p>
+<p><%= t(:Priority_placement) %></p>
+<p><%= t(:time_for_ad_run) %></p>
+<p><%= link_to t(:Post_ad), sell_your_car_start_add_path(:plan => 'vip') %></p>
+</div>
+</div>

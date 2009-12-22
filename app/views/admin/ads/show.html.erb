@@ -1,0 +1,18 @@
+<div class="showDetail">
+	<% if @ad.ad_type == 'Image' %> 
+    <%#= image_tag @ad.ad_image.public_filename(:leftbar), :align => :absmiddle if @ad.ad_image %>
+    <%= image_tag @ad.ad_image.public_filename, :align => :absmiddle if @ad.ad_image %> <br />
+	<% end %>
+    <div><span class="label"><%= t(:Ad_type) %>:</span> <%= @ad.ad_type %> </div>
+    <div><span class="label"><%= t(:Code) %>:</span> <%=h @ad.code %> </div>
+    <div><span class="label"><%= t(:Ad_name) %>:</span> <%= @ad.ad_name %></div>
+    <div><span class="label"><%= t(:Status) %>:</span> <%= @ad.status %></div>
+    <div><span class="label"><%= t(:Url) %>:</span> <%= @ad.url %></div>
+    <br /><br />
+    
+    <h2><%= t(:Advertiser_information) %>:</h2>
+    <div><span class="label"><%= t(:Advertiser_name) %>:</span> <%= @ad.advertiser_name %></div>
+    <div><span class="label"><%= t(:Phone_Number) %>:</span> <%= @ad.phone_number %> </div>
+    <div><span class="label"><%= t(:Email) %>: </span><%= @ad.email %> </div>
+    <div><span class="label"><%= t(:Comment) %>:</span> <%= @ad.comments %> </div>
+</div>

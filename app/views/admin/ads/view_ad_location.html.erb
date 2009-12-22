@@ -1,0 +1,55 @@
+<h1>
+	<%= t(:Advertisement_display_locations) %>
+</h1>
+<br />
+
+<div class="active-scaffold active-scaffold-as_admin__representative admin/representative-view default-theme" id="as_admin__representative-active-scaffold">
+	
+  <div id="as_admin__dealer-content">
+		<table cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th title="">
+            <a>
+              <%= t(:Advertisement_location) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Advertisement_name) %>
+            </a>
+          </th><th title="">
+            <a>
+              <%= t(:Advertiser_name) %>
+            </a>
+          </th>
+          <th class="actions">
+          </th>
+        </tr>
+      </thead>
+      <tbody id="as_admin__representative-tbody" class="records">
+        <% for location in @ad_locations %>
+        <tr id="as_admin__representative-list-3-row" class="record" >
+          <td class="">
+						<%= location.name %>
+          </td>
+          <td>
+						<% if location.ad %>
+							<%= location.ad.ad_name %>
+						<% else %>
+							-
+						<% end %>
+          </td>
+          <td>
+						<% if location.ad %>
+							<%= location.ad.advertiser_name %>
+						<% else %>
+							-
+						<% end %>
+          </td>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+	<%= link_to t(:Back), admin_ads_path %>
+</div>

@@ -1,0 +1,56 @@
+<h2><%= t(:Other_Features) %></h2>
+
+<% 	ot_feat = @vehicle.other_features
+	 	if ot_feat
+  		other_feature = ot_feat.split(';')
+		else
+  		other_feature = [":"]
+		end 
+%>
+<% 	a = []
+		other_feature.each{|x| a << x.split(':')}
+		a.flatten!
+%>
+
+<% @other_features.each_with_index do |other_feat, i| %>
+
+<p class="<%= cycle('even','') %>">
+	<span><%= other_feat %></span>
+	<% if a.include?(other_feat) -%>
+		<%= radio_button_tag "other_feat[#{i}]", "#{other_feat}", true %> Display
+		<%= radio_button_tag "other_feat[#{i}]", 0 %> Don't Display
+			<!-- <%# if a.include?((a.values_at(a.index(other_feat)+1)).to_s) %>
+				<%# display = "" %>
+			<%# else %>
+				<%# display = a.values_at(a.index(other_feat)+1) %>
+			<%# end %> -->
+		<%= text_field_tag "other_feat_value[#{i}]", a.values_at(a.index(other_feat)+1) %>
+	<% else -%>
+		<%= radio_button_tag "other_feat[#{i}]", "#{other_feat}" %> <%= t(:Display) %>
+		<%= radio_button_tag "other_feat[#{i}]", 0, true %> <%= t(:no_display) %>
+		<%= text_field_tag "other_feat_value[#{i}]" %>
+	<% end -%>
+</p>
+
+<% end %>
+
+<%# check_radio_button = ["MSRP", "Dealer Invoice", "Destination Charge"] %>
+
+<% @other_features_with_value.each_with_index do |of_value, i| %>
+	
+<p class="<%= cycle('even','') %>">
+	<span class="largeLabel">
+	<% save_value = data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == of_value} %>
+	<% save_unit = data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Unit'] if x['Key'] == of_value} %>
+	<%= of_value %> : <%= save_value %> <%= save_unit %></span>
+	<% if a.include?(of_value) -%>
+		<%= radio_button_tag "other_feat_with_value[#{i}]", "#{of_value}:#{save_value} #{save_unit}", true %> <%= t(:Display) %>
+		<%= radio_button_tag "other_feat_with_value[#{i}]", 0 %> <%= t(:no_display) %>
+	<% else -%>
+		<%= radio_button_tag "other_feat_with_value[#{i}]", "#{of_value}:#{save_value} #{save_unit}" %> <%= t(:Display) %>
+		<%= radio_button_tag "other_feat_with_value[#{i}]", 0, true %> <%= t(:no_display) %>
+	<% end -%>
+	
+</p>
+
+<% end %>

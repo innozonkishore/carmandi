@@ -1,0 +1,58 @@
+<div class="detail">
+<h2><%= t(:step2_enter_details) %></h2>
+
+<% form_for :vehicle, :url => sell_your_car_upload_photo_path, :method => :post, :html => {:onsubmit =>"if(check_required_fields2() == 0) return false; else return true;"} do |f| -%>
+
+<div class="formFeild">
+  <%= label_tag 'doors' %>
+  <%= f.text_field :doors %>
+	<span id='doors_is_required' class='hidden_errors'><%= t(:required_doors) %></span>
+</div>
+<div class="formFeild">
+  <%= label_tag 'engine_type' %>
+  <%= f.text_field :engine_type %>
+	<span id='engine_type_is_required' class='hidden_errors'><%= t(:required_engine_type) %></span>
+</div>
+<div class="formFeild">
+  <%= label_tag 'transmission' %>
+  <%= f.radio_button :transmission, UnsupportedVehicle::TRANSMISSION[0], :checked=>true %> <%= UnsupportedVehicle::TRANSMISSION[0] %>
+  <%= f.radio_button :transmission, UnsupportedVehicle::TRANSMISSION[1] %> <%= UnsupportedVehicle::TRANSMISSION[1] %>
+</div>
+<div class="formFeild">
+  <%= label_tag 'fuel' %>
+  <%= f.select :fuel, UnsupportedVehicle::FUEL %>
+</div>
+<div class="formFeild">
+  <%= label_tag 'exterior_color' %>
+  <%= f.text_field :exterior_color %>
+</div>
+<div class="formFeild">
+  <%= label_tag 'interior_color' %>
+  <%= f.text_field :interior_color %>
+</div>
+<div class="formFeild">
+  <%= label_tag 'mileage' %>
+  <%= f.text_field :mileage %>
+	<span id="mileage_is_required" class="hidden_errors"><%= t(:required_mileage) %></span>
+</div>
+<div class="formFeild">
+  <%= label_tag 'asking_price' %>
+  <%= f.text_field :asking_price %>
+	<span id="price_is_required" class="hidden_errors"><%= t(:required_price) %></span>
+</div>
+
+<div class="formFeild">
+  <span class="largeLabel"><%= t(:Additional_Vehicle_Details) %></span>
+  <%= f.text_area :detailed_info, :rows => 5, :cols => 50 %>
+</div>
+
+
+<div class="formFeild">
+	<span class="largeLabel"><%= t(:Add_Vehicle_Options) %></span>
+	<div class="options"><%= render :partial => 'vehicle_options' %></div>
+</div>
+
+<div class="formFeild"><label>&nbsp;</label><div class="button"><span></span><%= f.submit t(:Next) , :class=>"submit" %></div></div>
+
+<% end -%>
+</div>

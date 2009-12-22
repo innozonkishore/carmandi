@@ -1,0 +1,14 @@
+<% if @links.empty? %>
+
+	<%= t(:no_existing_links) %>
+	
+<% else %>
+
+	<h2><%= t(:Existing_Links) %></h2>
+
+	<% for link in @links -%>
+		<%= link_to link.name_english, new_listing_admin_links_path(:link_id => link.id) %>
+		<br />
+	<% end -%>
+	
+<% end %>

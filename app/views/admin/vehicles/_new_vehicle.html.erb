@@ -1,0 +1,158 @@
+<div class="upload">
+<div>
+  <%= label_tag 'vin' %>   <%= f.text_field :vin %>
+</div>
+
+<% if called_function == 'new' -%>
+<div><label>&nbsp;</label>
+	<%=link_to_remote "Perform VIN query", :url => vin_lookup_admin_vehicles_path, :with => "'vin=' + $('vehicle_vin').value", :before => "Element.show('vin_loading')", :complete => "Element.hide('vin_loading')" %>
+  <span style = "display:none" id = "vin_loading">
+    <%= image_tag 'loading.gif'%>
+  </span>
+</div>
+<% end -%>
+
+<div class="even">
+  <label>Trim:</label> <%= f.text_field :trim %>
+</div>
+ 
+<div>
+  <label>Make:</label> <%= f.select :vehicle_make_id, VehicleMake.find(:all).collect {|m| [ m.name, m.id ]}, { :include_blank => true } %>
+<%#= f.select :vehicle_make_id, VehicleMake.find(:all).collect {|m| [ m.name, m.id ]},{},{:onchange => remote_function(:update => "vehicle_vehicle_model_id", :url => update_models_vehicles_path, :with => "'vehicle_id='+$('vehicle_vehicle_make_id').value")} %>
+</div>
+ 
+<div  class="even">
+  <label>Model:</label> <%= f.select :vehicle_model_id, VehicleModel.all.collect{|m| [ m.name, m.id ]}, { :include_blank => true } %>
+<%#= f.select :vehicle_model_id, VehicleMake.first.vehicle_models.collect{|m| [ m.name, m.id ]} %>
+</div>
+
+<div>
+  <%= label_tag 'model_year' %>
+   
+  <%= f.text_field :model_year %>
+</div>
+
+<div class="even">
+  <label>Category: </label>
+   
+  <%= f.select :category_id, Category.find(:all).collect {|c| [ c.name, c.id ]}, { :include_blank => true } %>
+</div>
+
+<div>
+  <%= label_tag 'fuel', t(:fuel_optional) %>
+   
+  <%= f.select :fuel, Vehicle::FUEL, { :include_blank => true } %>
+</div>
+<div class="even">
+  <%= label_tag 'body_styles' %>
+   
+  <%= f.text_field :body_styles %>
+</div>
+<div>
+  <%= label_tag 'mileage' %>
+   
+  <%= f.text_field :mileage %>
+</div>
+<div class="even">
+  <%= label_tag 'price' %>
+   
+  <%= f.text_field :price %>
+</div>
+<div>
+  <%= label_tag 'interior_color', t(:interior_color_optional) %>
+  
+	<% unless @data -%>
+  	<%= f.select :interior_color, {}, { :include_blank => true } %>
+	<% else -%>
+		<% int_color_options = @data["VIN"].first["Vehicle"].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Interior Trim'}.compact.to_s.split(' | ') %>
+		<%= f.select :interior_color, int_color_options, { :include_blank => true } %>
+	<% end -%>
+</div>
+<div class="even">
+  <%= label_tag 'exterior_color', t(:exterior_color_optional) %>
+   
+	<% unless @data -%>
+  	<%= f.select :exterior_color, {}, { :include_blank => true } %>
+	<% else -%>
+		<% ext_color_options = @data["VIN"].first["Vehicle"].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Exterior Color'}.compact.to_s.split(' | ') %>
+  	<%= f.select :exterior_color, ext_color_options, { :include_blank => true } %>
+	<% end -%>
+</div>
+<div>
+	<% unless @vehicle.new_record? %>
+		<%= label_tag 'status' %>
+  	<%= f.select :status, Vehicle::STATUS %>
+	<% end %>
+</div>
+<div>
+  <%= label_tag 'stock_number' %>
+   
+  <%= f.text_field :stock_number %>
+</div>
+<div class="even">
+  <%= label_tag 'dealer_comment', t(:dealer_comment) %>
+   
+  <%= f.text_area :dealer_comment, :rows => 5 %>
+</div>
+ 
+
+<div>
+  <%= t(:Clearance_center) %>: <%= f.check_box :clearance_center%> <%= t(:Yess) %>
+</div>
+
+
+<% if called_function == 'edit' || !@vehicle.errors.blank? -%>
+	<% @standard_features = @data["VIN"].first["Vehicle"].first['Item'].collect{|x| x['Key'] if x['Value'] == 'Std.'}.compact %>
+	<div class="specification" id="specification1">
+		<%= render :partial => "/admin/vehicles/standard_features", :locals => {:standard_features => @standard_features} %>
+	</div>
+	<% @optional_features = @data["VIN"].first["Vehicle"].first['Item'].collect{|x| x['Key'] if x['Value'] == 'Opt.'}.compact %>
+	<div class="specification" id="specification2">
+		<%= render :partial => "/admin/vehicles/edit_optional_features", :locals => {:optional_features => @optional_features} %>
+	</div>
+	<% @other_features = @data["VIN"].first["Vehicle"].first['Item'].collect{|x| x['Key'] if x['Value'] == 'No data'}.compact %>
+	<% @other_features_with_value = @data["VIN"].first["Vehicle"].first['Item'].collect{|x| x['Key'] if x['Value'] != 'No data' && x['Value'] != 'Opt.' && x['Value'] != 'Std.' && x['Value'] != 'N/A' && !(CONSTANT_FEATURES.include?(x['Key']))}.compact %>
+	<div class="specification" id="specification3">
+		<%= render :partial => "/admin/vehicles/edit_other_features", :locals => {:other_features => @other_features, :other_features_with_value => @other_features_with_value, :data => @data} %>
+	</div>
+<% end -%>
+
+
+<% unless @vehicle.new_record? -%>
+<% for v_photo in @vehicle.vehicle_photos %>
+<div id = '<%= "associated_photos_#{v_photo.id}" %>' class="even">
+  <%= v_photo.filename %>
+  <%= link_to_remote t(:Delete), :url => destroy_photo_vehicles_path(:id => v_photo.id), :method => :delete, :complete => "Element.hide('associated_photos_#{v_photo.id}')", :confirm => "Are you sure to delete this photo?" %>
+   
+</div>
+<% end %>
+<% end -%>
+<%if false%>
+<div class="mtb10" id = "mtb10">
+  <div id = 'new_file'>
+    <%= file_field_tag 'photos[]', :id =>'first_file_element', :size => 23 -%>
+    <a class="small grey underline" onclick='remove_file(this)' onmouseover="change_cursor();" onmouseout='change_cursor_again();'>
+      <%= t(:Delete) %>
+    </a>
+  </div>
+</div>
+<a class="small grey underline" id = "small grey underline1" onclick ='attach_new_file();' onmouseover="change_cursor();" onmouseout='change_cursor_again();'>
+  <%= t(:further_attach) %>
+</a>
+<% end %>
+
+<% if @vehicle.errors.blank? %>
+<div class="specification" id="specification" style =" display:none;">
+</div>
+<div class="specification" id="specification1"  style =" display:none;">
+</div>
+<div class="specification" id="specification2" style =" display:none;">
+</div>
+<div class="specification" id="specification3" style =" display:none;">
+</div>
+<% end %>
+
+    <%= hidden_field_tag :vehicle_photos%>
+    <%=render :partial => 'shared/multiple_file_select'%>
+</div>
+

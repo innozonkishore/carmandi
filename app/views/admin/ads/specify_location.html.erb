@@ -1,0 +1,18 @@
+<% form_tag save_ad_location_admin_ads_path, :method => :post do %>
+
+<%= t(:Select_an_ad) %>:
+<%= select_tag "ad_id", options_for_select(Ad.active.collect{|a| [ a.ad_name, a.id ]}) %>
+<br />
+<%= t(:Select_the_webpage_link) %>:
+<%= select_tag "webpage", options_for_select(Link.all_ad_webpages) %>
+<%#= t(:Select_the_webpage_link) %>
+<%#= select_tag "ad_location_id", options_for_select(AdLocation.all.collect{|l| [ l.name, l.id ]}) %>
+<br />
+<%= t(:Selection_the_location_on_web_page) %>:
+<%= select_tag "location", options_for_select(AdLocation::LOCATION) %>
+
+<br />
+<%= submit_tag t(:Submit) %> | 
+<%= link_to t(:Cancel), admin_ads_path %>
+
+<% end %>

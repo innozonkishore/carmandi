@@ -1,0 +1,113 @@
+<script type="text/javascript">
+
+var decimalpoint = (1.11).toLocaleString().charAt(1);
+
+
+function calculatePayment()	{
+	var price = $('price').getValueFixed();
+	var pstrate = ($('pst').getValuePercent( 0.1 ) / 100.0);
+	var gstrate = ($('gst').getValuePercent( 0.1 ) / 100.0);
+	var term = parseInt( $('term').options[ $('term').selectedIndex ].value );
+	var interestrate = ($('interestrate').getValuePercent( 0.1 ) / 100.0);
+	var downpayment = $('downpayment').getValueFixed();
+	var tradein = $('tradein').getValueFixed();
+	var i;
+
+	if (( price == 0.0 ) || (interestrate == 0.0)) {
+		$('monthlypayment').value = "";
+		return;
+	}
+
+	var totalprice = price + (pstrate * price) + (gstrate * price) - tradein - downpayment;
+	var monthlyinterest = interestrate / 12.0;
+	var monthlyinterestfactor = monthlyinterest + 1.0;
+
+	var totalinterestfactor = 1;
+	for (i = 0; i < term; i++) {
+		totalinterestfactor = totalinterestfactor * monthlyinterestfactor;
+	}
+
+	var monthlypayment = (totalprice * totalinterestfactor * monthlyinterest) / (totalinterestfactor - 1.0);
+	if ( monthlypayment > 0.0 ) {
+		$('monthlypayment').value = Math.round(monthlypayment * 100.00) / 100.00; // Eliminate browser discrepancy in toFixed()
+		$('monthlypayment').formatValueAsMoney();
+	} else {
+		$('monthlypayment').value = "";
+	}
+}
+
+function clearForm() {
+	$('price').value = "";
+	$('pst').value = "7.00 %";
+	$('gst').value = "5.00 %";
+	$('interestrate').value = "";
+	$('downpayment').value = "";
+	$('tradein').value = "";
+	$('monthlypayment').value = "";
+}
+
+</script>
+
+
+<h1><%= t(:Monthly_Loan_Calculator) %></h1>
+<span class="bodyContents">
+	<p><%= t(:loan_calculator_theory) %></p>
+	<br/>
+	<br/>
+	<div id="calculator" action="#">
+		<table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#f8f8f8">
+			<tbody>
+				<tr>
+					<td width="35%" valign="top" class="formfield"><%= t(:Price) %><span class="req">*</span>:</td>
+					<td width="58%" valign="top" class="formfield"><label>
+						<input type="text" onchange="$(this).formatValueAsMoney();calculatePayment();" size="20" id="price" name="price"/>
+					</label></td>
+				</tr>
+				<tr>
+					<td valign="top" class="formfield"><%= t(:PST) %> (%) :</td>
+					<td valign="top" class="formfield"><input type="text" value="7.00 %" onchange="$(this).formatValueAsPercent(0.1, 2);calculatePayment();" size="20" id="pst" name="pst"/></td>
+				</tr>
+				<tr>
+					<td valign="top" class="formfield"><%= t(:GST) %> (%) :</td>
+					<td valign="top" class="formfield"><input type="text" value="5.00 %" onchange="$(this).formatValueAsPercent(0.1, 2);calculatePayment();" size="20" id="gst" name="gst"/></td>
+				</tr>
+				<tr>
+					<td valign="middle" class="formfield"><%= t(:Term) %><span class="req">*</span>:</td>
+					<td valign="middle" class="formfield"><label>
+						<select onchange="calculatePayment();" id="term" name="term">
+							<option value="12"><%= t(:a12_months) %></option>
+							<option value="24"><%= t(:a24_months) %></option>
+							<option selected="selected" value="36"><%= t(:a36_months) %></option>
+							<option value="48"><%= t(:a48_months) %></option>
+							<option value="60"><%= t(:a60_months) %></option>
+							<option value="72"><%= t(:a72_months) %></option>
+						</select>
+					</label></td>
+				</tr>
+				<tr>
+					<td valign="top" class="formfield"><%= t(:Interest_Rate) %><span class="req">*</span>: </td>
+					<td valign="top" class="formfield"><input type="text" onchange="$(this).formatValueAsPercent(0.1, 2);calculatePayment();" size="20" id="interestrate" name="interestrate"/></td>
+				</tr>
+				<tr>
+					<td valign="top" class="formfield"><%= t(:Down_Payment) %>:</td>
+					<td valign="top" class="formfield"><input type="text" onchange="$(this).formatValueAsMoney();calculatePayment();" size="20" id="downpayment" name="downpayment"/></td>
+				</tr>
+				<tr>
+					<td valign="top" class="formfield"><%= t(:Trade_In_Vehicle_value) %>:</td>
+					<td valign="top" class="formfield"><input type="text" onchange="$(this).formatValueAsMoney();calculatePayment();" size="20" id="tradein" name="tradein"/></td>
+				</tr>
+				<tr>
+					<td valign="top" class="formfield"><%= t(:Your_Monthly_Payment_is) %>: </td>
+					<td valign="top" class="formfield"><input type="text" style="background: rgb(255, 255, 255) none repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous; color: rgb(0, 46, 139); font-weight: bold;" disabled="disabled" size="20" id="monthlypayment" name="monthlypayment"/></td>
+				</tr>
+				<tr>
+					<td valign="top" class="formfield"><span style="font-style: italic;"><span class="req">*</span> <%= t(:marks_required_fields) %></span></td>
+					<td valign="top" class="formfield"><label>
+						<input type="button" onclick="clearForm();" class="button" value="Reset Calculator" name="reset"/>
+					</label></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</span>

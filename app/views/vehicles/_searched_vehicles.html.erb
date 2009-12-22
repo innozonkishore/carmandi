@@ -1,0 +1,49 @@
+<% if @searched_vehicles.empty? %>
+	<%= t(:no_vehicle_found) %>
+<% else %>
+<div class="buttonBar">
+	<% if session[:clearance_center] == true %>
+	<%= button_to "Refine Search", clearance_center_vehicles_path, :class => "simpleBotton", :method => :get %>
+	<% else %>
+	<%= button_to "Refine Search", used_car_vehicles_path, :class => "simpleBotton", :method => :get %>
+	<% end %>
+</div>
+
+<% for vehicle in @searched_vehicles -%>
+<div class="searchResult">
+	<div class="resultHead">
+		<% detail_link = vehicle.model_year.to_s + " " + vehicle.vehicle_make.name + " " + vehicle.vehicle_model.name + " " + vehicle.trim %>
+		<div class="carName"><%= link_to detail_link, vehicle_path(vehicle) %></div>
+		<div class="price"><%= number_to_currency(vehicle.price, :precision => 2) %></div>
+	</div>      
+	<div class="detail">
+		<div class="carDetail">
+			<span class="carImage">
+			    <div><%= link_to image_tag(vehicle.vehicle_thumb_image, :alt => :Photo), vehicle_path(vehicle) -%></div>
+				<p class="more"><%= link_to "more photos &gt;&gt;", vehicle_path(vehicle) %></p>
+			</span>
+			<span class="details"><span class="bold"><%= t(:Used) %></span><br>
+			Mileage: <%= vehicle.mileage %><br>
+			<%= vehicle.try(:exterior_color) %><br>
+		</span>
+
+		<p class="decs"><%= truncate(vehicle.dealer_comment, :length => 110) %></p>
+	</div>
+
+	<% if @loc %> <div class="mileageDetail"><%= "%.2f" %"#{vehicle.distance_from(@loc) rescue 0}"%> Kms </div> <% end %>
+	<div class="sellerDetail"><span class="bold"><%= vehicle.dealer.try(:dealership_name) %></span></div>
+	<div class="carFax">
+		<% if vehicle.dealer.try(:primary_coupon) %>
+			<%= link_to vehicle.dealer.primary_coupon.name, vehicle_path(vehicle) %>
+			<br />	
+			<%= link_to t(:See_more_coupons), coupon_list_coupons_path(:coupon_id => vehicle.dealer.primary_coupon.id, :search => true) %><br />
+		<% end %>
+		<%= link_to t(:Get_Carproof_report), "http://www.carproof.com/direct.asp?tid=583" , :class=> "carProof" %>
+	</div>
+</div>
+</div>
+<% end -%>
+
+<%= will_paginate @searched_vehicles %>
+
+<% end %>

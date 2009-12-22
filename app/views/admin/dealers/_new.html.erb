@@ -1,0 +1,127 @@
+<%= error_messages_for :user %>
+<% @user.password = @user.password_confirmation = nil %>
+<% if @dealer.new_record? %>
+<% target = admin_dealers_path  %>
+<% method = 'post' %>
+<% else -%>
+<% target = admin_dealer_path(@dealer) %>
+<% method = 'put' %>
+<% end %>
+<% form_for @dealer, :url => target, :method => method, :html => {:multipart => :true} do |f| -%>
+
+<div class="adminForm">
+<div class="even"><label><%= t(:select_plan) %></label>
+	<%= f.radio_button :account_type, Dealer::TYPE["self-served"], {:checked => @dealer.account_type == false ? 'checked' : false} %> <%= t(:self_served) %>
+	<%= f.radio_button :account_type, Dealer::TYPE["full-served"], {:checked => @dealer.account_type == true ? 'checked' : false} %> <%= t(:full_served) %>
+</div>
+
+<div >
+	<%= label_tag 'upload_limit' %> <%= f.select :upload_limit, Dealer::UPLOAD_LIMIT  %> 		<!-- Array(1..25) -->
+	<%= text_field_tag :upload_limit, nil, :size => 21 %><span class="small"> <%= t(:mention_upload_limit) %></span>
+</div>
+
+<div class="even"><%= label_tag 'dealership_name' %> 
+<%= f.text_field :dealership_name %></div>
+</div>
+<% fields_for :user do |user| %>
+
+<h1 class="pl10">Contact person details</h1>
+<div class="adminForm">
+<div class="even"><%= label_tag 'firstname', t(:contact_person_firstname) %> 
+<%= user.text_field :firstname %></div>
+
+<div><%= label_tag 'lastname', t(:contact_person_lastname) %> 
+<%= user.text_field :lastname %></div>
+
+<div class="even"><%= label_tag 'phone_number' %> 
+<%= user.text_field :phone_number %></div>
+
+<!-- <div><%#= label_tag 'zipcode', t(:Contact_person_postal_code) %> 
+<%#= user.text_field :zipcode %></div> -->
+
+<div class="even"><%= label_tag 'email' %> 
+<%= user.text_field :email %></div>
+
+<div><%= label_tag 'password' %> 
+<%= user.password_field :password %></div>
+
+<div class="even"><%= label_tag 'password_confirmation', t(:Confirm_Password) %> 
+<%= user.password_field :password_confirmation %></div>
+</div>
+
+<h1 class="pl10"><%= t(:Dealership_details) %></h1>
+<div class="adminForm">
+<div class="even"><label>Sample Banner:</label> <%= file_field_tag :dealer_logo, :size => 30 -%><span class="small"> (<%= t(:optional) %>)</span></div>
+
+<div><%= label_tag 'website_url' %> 
+<%= f.text_field :website_url %></div>
+
+<div class="even"><%= label_tag 'phone_number' %> 
+<%= f.text_field :phone_number %></div>
+
+<div><%= label_tag 'address' %> 
+<%= f.text_field :address %></div>
+
+<div class="even"><%= label_tag 'city' %> 
+<%= f.text_field :city %></div>
+
+<div><%= label_tag 'province' %> 
+<%= f.text_field :province %></div>
+
+<div class="even"><%= label_tag 'postal_code' %> 
+<%= f.text_field :postal_code %></div>
+
+<div><%= label_tag 'status' %>
+<%= user.select :active, User::STATUS %></div>
+</div>
+
+<h1 class="pl10"><%= t(:Coupon_Details) %><span class="small"> (<%= t(:optional) %>)</span></h1>
+<div class="adminForm">
+<div class="even">
+	
+	<% unless @dealer.coupons.empty? %>
+		<div class="formFeild"><label>
+			<%= t(:Existing_Coupons) %>
+		</label>
+		<br />
+		<% @dealer.coupons.each do |coupon| %>
+			<%= coupon.name %> &nbsp;
+		<% end %>
+		</div>
+	<% else %>
+	
+	<div class="mtb10" id = "mtb10">
+	  <div id = 'new_file'>
+			<div class="formFeild"><label><%= t(:Coupon_Name) %></label>
+			<%= text_field_tag "coupon_names[]", nil, :size => 30 %></div>
+
+			<div class="formFeild"><label><%= t(:Coupon_Image) %></label>
+		
+	    <%= file_field_tag 'coupons[]', :id =>'first_file_element', :size => 30 -%>
+			</div>
+	  </div>
+	</div>
+	<a class="small grey underline" id = "small grey underline1" onclick ='attach_new_coupon();' onmouseover="change_cursor();" onmouseout='change_cursor_again();'>
+	  <%= t(:further_attach) %>
+	</a>
+	<% end %>
+	
+	
+</div>
+
+
+<% if @user.new_record? -%>
+	<%= hidden_field :user, :role_id, :value => dealer_role_id %>
+<% end -%>
+
+<% end %>
+
+<div><label>&nbsp;</label>
+	<% if @dealer.new_record? -%>
+		<span class="button"><span>&nbsp;</span><%= submit_tag t(:Create) , :class=> 'submit'%></span>
+	<% else -%>
+		<span class="button"><span>&nbsp;</span><%= submit_tag t(:Save), :class=> "submit" %></span>
+	<% end -%>
+</div>
+<% end -%>
+</div>

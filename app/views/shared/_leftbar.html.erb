@@ -1,0 +1,40 @@
+<div class="leftbar">
+	<h2><%= t(:Important_Links) %></h2>
+	<ul>
+		<% if current_page?(:controller => 'static', :action => 'calculator') %><li class="active"><% else %><li><% end %>
+			<%= link_to t(:Monthly_payment_calculator), monthly_payment_calculator_path %>
+		</li>
+		<% for link in Link.important_active.all %>
+		<% if controller.controller_path == 'admin/links' && params[:id] == "#{link.id}" %><li class="active"><% else %><li><% end %>
+			<% if @english == true %>
+				<%= link_to link.name_english, links_path(link) %>
+			<% elsif @hindi == true %>
+				<%= link_to link.name_hindi, links_path(link) %>
+			<% elsif @urdu == true %>
+				<%= link_to link.name_urdu, links_path(link) %>
+			<% elsif @punjabi == true %>
+				<%= link_to link.name_punjabi, links_path(link) %>
+			<% end %>
+		</li>
+		<% end %>
+	</ul>    
+	<div class="ads">
+		<% if current_page?(:controller => 'home', :action => 'index') || @main_ads == true %>
+			<%= render :partial => 'shared/leftbar_ad', :locals => {:ad_page => 'leftbar_home'} %>
+		<% elsif @new_car == true -%>
+			<%= render :partial => 'shared/leftbar_ad', :locals => {:ad_page => 'leftbar_new_car'} %>
+		<% elsif session[:clearance_center] == nil && @used_car == true %>
+			<%= render :partial => 'shared/leftbar_ad', :locals => {:ad_page => 'leftbar_used_car'} %>
+		<% elsif @clearance_center == true %>
+			<%= render :partial => 'shared/leftbar_ad', :locals => {:ad_page => 'leftbar_clearance_center'} %>
+		<% elsif @private_sales == true %>
+			<%= render :partial => 'shared/leftbar_ad', :locals => {:ad_page => 'leftbar_private_sales'} %>
+		<% elsif @sell_your_car == true %>
+			<%= render :partial => 'shared/leftbar_ad', :locals => {:ad_page => 'leftbar_sell_your_car'} %>
+		<% elsif @show_link == true && @link %>
+			<%= render :partial => 'shared/leftbar_ad', :locals => {:ad_page => 'leftbar_'+@link.name_english } %>
+		<% elsif @calculator == true %>
+			<%= render :partial => 'shared/leftbar_ad', :locals => {:ad_page => 'leftbar_monthly_payment_calculator' } %>
+		<% end -%>
+	</div>    
+</div>

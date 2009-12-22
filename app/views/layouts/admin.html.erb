@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>
+      <%= t(:carmandi) %>
+    </title>
+    <%= stylesheet_link_tag "reset", "style", 'errors' -%>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+    <%= javascript_include_tag :defaults -%>
+    <%= active_scaffold_includes %>
+	 <!--[if IE]>
+      <%= stylesheet_link_tag "IE" -%>
+    <![endif]-->
+
+  </head>
+  <body id="admin">
+    <div class="wrapper">
+        <div class="header">
+            <%= render :partial => 'shared/header' %>
+            <%= render :partial => 'shared/navigation' %>
+        </div>    
+    <div class="pageContent">
+      <div class = 'admin_wrapper'>
+				<%= render :partial => 'shared/admin_navigation' %>
+        
+        <% if flash[:notice] %>
+        <div class = 'notice'>
+          <%= flash[:notice] %>
+        </div>
+        <% end %>
+        <% if flash[:error] %>
+        <div class = 'notice'>
+          <%= flash[:error] %>
+        </div>
+        <% end %>
+        <div style ="padding: 10px;">
+        <%= yield %>
+        </div>
+      </div>
+    </div>
+    <%# render :partial => 'shared/footer' %>
+  </body>
+</html>

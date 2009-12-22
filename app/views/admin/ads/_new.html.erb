@@ -1,0 +1,54 @@
+<% form_for [:admin, @ad], :html => {:multipart => :true} do |f| -%>
+	<%= error_messages_for :ad %>
+	
+	<%= t(:What_is_type_of_ad) %>: 
+	<br />
+	<% if @ad.new_record? %>
+		<%= f.radio_button :ad_type, 'Image', {:checked => true} %> <%= t(:Image) %>
+	<% else %>
+		<%= f.radio_button :ad_type, 'Image', {:checked => @ad.ad_type == 'Image' ? 'checked' : false} %> <%= t(:Image) %>
+	<% end %>
+	<%= f.radio_button :ad_type, 'Code', {:checked => @ad.ad_type == 'Code' ? 'checked' : false} %> <%= t(:Code) %>
+	<br />
+	<%= t(:upload_if_ad_image) %>
+	<br />
+	<%= file_field_tag 'photo', :id =>'first_file_element', :size => 23 -%><br />
+	<% if @ad.ad_image %>(<%= @ad.ad_image.filename %>)<% end %>
+  <br /><br />
+	<%= t(:cut_and_paste_ad_code) %>
+	<br />
+	<%= f.text_area :code, :rows => 5, :cols => 40 %>
+	<br />
+	<%= t(:add_ad_name) %>
+	<br />
+	<%= f.text_field :ad_name %>
+	<br />
+	<%= label_tag 'url' %>
+	<%= f.text_field :url %>
+	<br /><br />
+	
+	<%= t(:Advertiser_information) %>
+	<br />
+	<%= label_tag 'advertiser_name' %>
+	<%= f.text_field :advertiser_name %>
+	<br />
+	<%= label_tag 'phone_number' %>
+	<%= f.text_field :phone_number %>
+	<br />
+	<%= label_tag 'email' %>
+	<%= f.text_field :email %>
+	<br />
+	<%= label_tag 'comments' %>
+	<%= f.text_area :comments, :rows => 5, :cols => 40 %>
+	<br />
+	
+	<%= t(:Status) %>: <%= f.select :status, Ad::STATUS %>
+	<br />
+	<% if @ad.new_record? %>
+		<%= f.submit t(:Create_Ad) %>
+	<% else %>
+		<%= f.submit t(:Save) %>
+	<% end%>
+	| <%= link_to t(:Cancel), admin_ads_path %>
+	
+<% end -%>

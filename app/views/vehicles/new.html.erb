@@ -1,0 +1,30 @@
+<%= error_messages_for :vehicle %>
+<% if @vehicle.new_record? %>
+<% target = vehicles_path  %>
+<% method = 'post' %>
+<% else -%>
+<% target = vehicle_path(@vehicle) %>
+<% method = 'put' %>
+<% end %>
+<%# form_for @vehicle, :url => target, :method => method, :html => {:onsubmit => "if(swfu.getStats().files_queued < 1){alert('Please select atleast one photo for the vehicle');$('submit_btn').disabled=false; $('submit_btn').value ='upload';}else{swfu.startUpload();} return false;", :multipart => :true, :id => 'vehicle_upload_form'} do |f| -%>
+<% form_for @vehicle, :url => target, :method => method, :html => {:onsubmit => "submit_vehicle_form(); return false;", :multipart => :true, :id => 'vehicle_upload_form'} do |f| -%>
+<h1>
+  <%= t(:Upload_vehicle) %>
+</h1>
+<div class="adminForm">
+<%= render :partial => 'admin/vehicles/new_vehicle', :locals => { :f => f, :vehicle => @vehicle, :called_function => 'new'} %>
+
+<% if @vehicle.new_record? -%>
+	<%= hidden_field :vehicle, :dealer_id, :value => @dealer_id %>
+<% end -%>
+<div class="labelMargin even">
+<div class="button">
+  <span>&nbsp;</span>
+    <%= submit_tag t(:Upload), :id => 'vehicle_form_submit_btn', :class=>'submit' %>
+  <span class ='no_button' id = 'vehicle_form_loading' style ='display:none;'>
+    <%=image_tag 'loading.gif' %>
+  </span>
+</div>
+</div>
+<% end -%>
+</div>

@@ -1,0 +1,49 @@
+<div class="listing">
+    
+<h2><%= t(:New_Listing) %></h2>
+
+<% form_for :listing, :url => create_listing_admin_links_path, :method => :post, :html => {:multipart => :true} do |f| -%>
+	<%= error_messages_for :listing %>
+	<div class="formFeild"><%= label_tag 'name' %> <%= f.text_field :name %></div>
+	
+	<div class="formFeild"><%= label_tag 'web_address' %> <%= f.text_field :web_address %></div>
+	
+	<div class="formFeild"><%= label_tag 'full_address' %> <%= f.text_field :full_address %></div>
+	<%= radio_button_tag "options[0]", "full_address" %> <%= t(:Display) %>
+	<%= radio_button_tag "options[0]", 0, true %> <%= t(:no_display) %>
+	
+	<div class="formFeild"><%= label_tag 'contact_info' %> <%= f.text_field :contact_info %></div>
+	<%= radio_button_tag "options[1]", "contact_info" %> <%= t(:Display) %>
+	<%= radio_button_tag "options[1]", 0, true %> <%= t(:no_display) %>
+	
+	<div class="formFeild"><%= label_tag 'description' %> <%= f.text_area :description, :rows => 5, :cols => 30 %></div>
+	<%= radio_button_tag "options[2]", "description" %> <%= t(:Display) %>
+	<%= radio_button_tag "options[2]", 0, true %> <%= t(:no_display) %>
+	
+	<div class="formFeild"><%= label_tag 'position' %> <%= f.text_field :position %></div>
+	
+	<div class="formFeild"><%= label_tag 'status' %> <%= f.select :status, Link::STATUS %></div>
+	
+	<div class="formFeild"><label>Select Photo</label><%= file_field_tag 'photo', :id =>'first_file_element', :size => 30 -%></div>
+    <div class="formFeild"><%= f.hidden_field 'link_id', :value => @listing.link.id %></div>
+	
+		<div class="mtb10" id = "mtb10">
+		  <div id = 'new_file'>
+				<div class="formFeild"><label><%= t(:Coupon_Name) %></label>
+				<%= text_field_tag "coupon_names[]", nil, :size => 30 %></div>
+
+				<div class="formFeild"><label><%= t(:Coupon_Image) %></label>
+			
+		    <%= file_field_tag 'coupons[]', :id =>'first_file_element', :size => 30 -%>
+				</div>
+		  </div>
+		</div>
+		<a class="small grey underline" id = "small grey underline1" onclick ='attach_new_coupon();' onmouseover="change_cursor();" onmouseout='change_cursor_again();'>
+		  <%= t(:further_attach) %>
+		</a>
+  
+    <div class="formFeild">
+    	<label>&nbsp;</label><div class="button"><span>&nbsp;</span><%= f.submit t(:Create_listing), :class=> 'submit' %></div></div>
+	
+<% end -%>
+</div>

@@ -1,0 +1,19 @@
+<div class="forgotPwd login">
+<%= error_messages_for :user %>
+
+<% form_for :user do |f| -%>
+<div id="newedit">
+        <h1><%= t(:request_to_reset_password) %></h1>
+        
+        <div class="formFeild">
+            <label><%= t(:Email) %>:</label>
+            <%= f.text_field :email , :class=>"textbox" %>
+        </div>
+        
+        <div class="formFeild">
+            <div class="rightLabel"><div class="button"><span>&nbsp;</span><%= submit_tag t(:Submit) ,:class => 'submit' %></div></div>
+        </div>
+        
+</div>
+<% end -%>
+</div>

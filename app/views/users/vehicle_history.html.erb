@@ -1,0 +1,46 @@
+<% if @saved_vehicles.empty? -%>
+
+	<%= t(:no_saved_vehicle_in_history) %>
+	
+<% else -%>
+	
+	<!-- <div class="saved_vehicle_history_table_title">
+		<%#= t(:Vehicle_Photo) %>
+		<%#= t(:Vehicle_Name) %>
+		<%#= t(:Saved_on) %>
+		<%#= t(:Dealership_name) %>
+	</div> -->
+	<h1><%= t(:Vehicles_saved_by_you) %></h1>
+	<% @saved_vehicles.each do |vehicle| %>	
+		<% v = vehicle.resource %>
+		<div class="saved_vehicle_history_table">
+			<div class="vehicle_history_photo">
+				<%= image_tag v.vehicle_thumb_image %>
+			</div>
+			<div class="vehicle_history_decs">
+			<% if v.class.name == "Vehicle" %>
+				<div class="title"><% detail_link = v.model_year.to_s + " " + v.vehicle_make.name + " " + v.vehicle_model.name + " " + v.trim %>	</div>
+				<% if v.status == 'active' %>
+			    <div class="detailLink"><%= link_to detail_link, vehicle_path(v, :saved => true) %></div>
+				<% else %>
+					<div class="detail_link"><%= detail_link %></div>
+					(<%= t(:vehicle_no_longer_available) %>)
+				<% end %>
+				<div class="date"><span class="label">Saved On : </span><%= vehicle.created_at.to_s(:month_format) %></div>
+				<div class="dealerName"><span class="label">Dealer : </span><%= v.dealer.dealership_name %>	</div>
+			<% else %>
+				<div class="title"><% detail_link = v.model_year.to_s + " " + v.vehicle_make.name + " " + v.model + " " + v.trim %></div>
+				<% if v.status == 'active' %>
+			    <div class="detailLink"><%= link_to detail_link, private_vehicle_path(v, :saved => true) %></div>
+				<% else %>
+					<div class="detail_link"><%= detail_link %></div>
+					(<%= t(:vehicle_no_longer_available) %>)
+				<% end %>
+				<div class="date"><span class="label">Saved On : </span><%= vehicle.created_at.to_s(:month_format) %></div>
+				<div class="dealerName"><span class="label">Dealer : </span><%= v.seller.fullname %></div>
+			<% end %>
+			</div>
+		</div>
+	<% end %>
+
+<% end -%>

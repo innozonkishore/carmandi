@@ -1,0 +1,2 @@
+module PrivateVehiclesHelper
+end

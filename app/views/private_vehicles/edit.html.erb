@@ -1,0 +1,97 @@
+<% form_for @vehicle do |f| %>
+<%= error_messages_for :vehicle %>
+
+<div>
+  <%= label_tag 'model_year', t(:Year) %>
+  <%= f.text_field :model_year %>
+	<span id='year_is_required' class='hidden_errors'><%= t(:required_year) %></span>
+</div>
+<br />
+<div>
+  <%= label_tag 'vehicle_make_id', t(:Make) %>
+  <%= f.select :vehicle_make_id, VehicleMake.find(:all).collect {|m| [ m.name, m.id ]} %>
+	<span id='make_is_required' class='hidden_errors'><%= t(:required_make) %></span>
+</div>
+<br />
+<div>
+	<%= label_tag 'vehicle_model', t(:Model) %>
+	<%= f.text_field :model %>
+	<span id='model_is_required' class='hidden_errors'><%= t(:required_model) %></span>
+</div>
+<br />
+<div>
+  <label>Trim:</label> <%= f.text_field :trim %>
+	<span id='trim_is_required' class='hidden_errors'><%= t(:required_trim) %></span>
+</div>
+<br />
+<div>
+	<%= label_tag 'drive' %>
+	<%= f.select :drive, UnsupportedVehicle::DRIVE %>
+</div>
+<br />
+<div>
+  <%= label_tag 'category_id', t(:Body_style) %>
+	<%= f.select :category_id, Category.find(:all).collect {|c| [ c.name, c.id ]} %>
+</div>
+<br />
+<div>
+	<%= label_tag 'zipcode', 'Vehicle Location' %>
+	<%= f.text_field :zipcode %> <%= t(:postcode) %>
+	<span id='zipcode_is_required' class='hidden_errors'><%= t(:required_zipcode) %></span>
+</div>
+<br />
+	<%= label_tag 'vin', 'VIN (Optional)' %>
+	<%= f.text_field :vin %>
+<br />
+<div>
+  <%= label_tag 'doors' %>
+  <%= f.text_field :doors %>
+</div>
+<div>
+  <%= label_tag 'engine_type' %>
+  <%= f.text_field :engine_type %>
+</div>
+<div>
+  <%= label_tag 'transmission' %>
+  <%= f.radio_button :transmission, UnsupportedVehicle::TRANSMISSION[0] %> <%= UnsupportedVehicle::TRANSMISSION[0] %>
+  <%= f.radio_button :transmission, UnsupportedVehicle::TRANSMISSION[1] %> <%= UnsupportedVehicle::TRANSMISSION[1] %>
+</div>
+<div>
+  <%= label_tag 'fuel' %>
+  <%= f.select :fuel, UnsupportedVehicle::FUEL %>
+</div>
+<div>
+  <%= label_tag 'exterior_color' %>
+  <%= f.text_field :exterior_color %>
+</div>
+<div>
+  <%= label_tag 'interior_color' %>
+  <%= f.text_field :interior_color %>
+</div>
+<div>
+  <%= label_tag 'mileage' %>
+  <%= f.text_field :mileage %>
+	<span id="mileage_is_required" class="hidden_errors"><%= t(:required_mileage) %></span>
+</div>
+<div>
+  <%= label_tag 'asking_price' %>
+  <%= f.text_field :asking_price %>
+	<span id="price_is_required" class="hidden_errors"><%= t(:required_price) %></span>
+</div>
+
+<div>
+  <%= t(:Additional_Vehicle_Details) %>
+	<br />
+  <%= f.text_area :detailed_info, :rows => 5, :cols => 50 %>
+</div>
+<br />
+
+<div>
+	<%= t(:Add_Vehicle_Options) %><br />
+	<%= render :partial => 'vehicle_options' %>
+</div>
+<br />
+<%= f.submit t(:Save) %> | 
+<%= link_to t(:Cancel), manage_ads_user_path(current_user) %>
+
+<% end %>

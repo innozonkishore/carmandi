@@ -1,0 +1,41 @@
+<div style = "float:right;">
+	<% if params[:search] %>
+		<%= button_to t(:Back_to_Search_Results), search_result_vehicles_path, :class => "simpleBotton" %>
+	<% elsif params[:vehicle_id] %>
+		<%= button_to t(:Back_to_Vehicle_details), vehicle_path(params[:vehicle_id]), :method => :get, :class => "simpleBotton" %>
+	<% end %>
+</div>
+
+<% if @dealer -%>
+	<div>
+		<h1><%= @dealer.dealership_name %></h1><br />
+		<%= image_tag @dealer.dealer_logo.public_filename(:thumb), :align => :absmiddle if @dealer.dealer_logo %><br />
+		<%= @dealer.address %><br />
+		<%= @dealer.phone_number %><br />
+		<%= link_to @dealer.website_url.ensure_url, @dealer.website_url.ensure_url if !@dealer.website_url.blank? %>
+	</div>
+	<br />
+	<div>
+		<% @dealer.coupons.each do |coupon| %>
+			<%= render :partial => 'coupon', :locals => {:coupon => coupon} %>
+		<% end %>
+	</div>
+
+<% elsif @listing -%>
+
+	<div class="couponList">
+		<p><h1><%= @listing.name %></h1></p>
+		<%= image_tag @listing.photo.public_filename(:thumb), :align => :absmiddle if @listing.photo %>
+		<% if @listing.display?('full_address') %><p><%= t(:Address) %> :</span> <%= @listing.full_address %></p><% end %>
+	  <% if @listing.display?('contact_info')%><p><%= t(:Contact_Info) %> :</span> <%= @listing.contact_info %></p><% end %>
+		<% if @listing.display?('description')%><p><%= @listing.description %></p><% end %>
+		<%= link_to @listing.web_address.ensure_url, @listing.web_address.ensure_url if !@listing.web_address.blank? %>
+	</div>
+	<br />
+	<div>
+		<% @listing.coupons.each do |coupon| %>
+			<%= render :partial => 'coupon', :locals => {:coupon => coupon} %>
+		<% end %>
+	</div>
+
+<% end -%>

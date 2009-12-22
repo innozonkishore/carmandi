@@ -1,0 +1,125 @@
+<% unless @dealer %>
+<div class = "admin_links">
+  <p>
+    <%= t(:no_dealer_with_this_name) %> 
+  </p>
+</div>
+<% else %>
+<div class="active-scaffold active-scaffold-as_admin__representative admin/representative-view default-theme" id="as_admin__representative-active-scaffold">
+  <div class="active-scaffold-header">
+    <div class="actions">
+      <%=link_to t(:create_new), new_admin_dealer_path, :class => 'new action' %>
+  		<%= link_to t(:Search), '#', :class => "show_search action", :onclick => "$('search_dealer_by_name').style.display = 'block';" %>
+  	</div>
+    <h2>
+      <%= t(:Dealers) %>
+    </h2>
+  </div>
+  <table cellspacing="0" cellpadding="0">
+    <tbody id="as_admin__representative-search-container" class="before-header">
+      <tr>
+        <td/>
+      </tr>
+    </tbody>
+  </table>
+
+	<div class="show_search-view admin/make-view view" id="search_dealer_by_name" style="display:none;">
+		<a title="Close" class="inline-adapter-close" href="">Close</a>
+		<% form_tag search_admin_dealers_path, :method => :post do %>
+			<%= text_field_tag "dealership_name", nil, :size => 50 %>
+			<%= submit_tag t(:Search) %>
+			<a onclick="f = this.up('form'); f.reset();" class="cancel" href="javascript:void(0)"><%= t(:Reset) %></a>
+		<% end %>
+	</div>
+
+  <div id="as_admin__dealer-content">
+    <table cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th title="">
+            <a>
+              <%= t(:Dealer_Logo) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Dealership_name) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:City) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Province) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Address) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Postal_code) %>
+            </a>
+          </th>
+          <th title="">
+            <a>
+              <%= t(:Website_url) %>
+            </a>
+          </th>
+          <th class="actions">
+          </th>
+        </tr>
+      </thead>
+      <tbody id="as_admin__representative-tbody" class="records">
+        <tr id="as_admin__representative-list-3-row" class="record" >
+          <td>
+						<%= image_tag @dealer.dealer_logo.public_filename(:thumb), :align => :absmiddle if @dealer.dealer_logo %>
+          </td>
+          
+          <td class="">
+						<%= @dealer.dealership_name %>
+          </td>
+          <td>
+						<%= @dealer.city %>
+          </td>
+          <td>
+						<%= @dealer.province %>
+          </td>
+          <td>
+						<%= @dealer.address %>
+          </td>
+          <td>
+						<%= @dealer.postal_code %>
+          </td>
+          <td>
+						<%= @dealer.website_url %>
+          </td>
+          <td class="actions">
+            <table cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td class="indicator-container">
+                    <img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif?1250079352" id="as_admin__representative-record-3-loading-indicator" class="loading-indicator" alt="loading indicator"/>
+                  </td>
+                  <td>
+                    <%= link_to t(:Edit), edit_admin_dealer_path(@dealer) %>
+                  </td>
+                  <td>
+                    <%= link_to t(:Show), admin_dealer_path(@dealer) %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<% end %>

@@ -1,0 +1,40 @@
+<div class="showListing">
+<% if @listings.empty? %>
+
+	<%= t(:no_existing_listings) %>
+	
+<% else %>
+
+	<h1><%= @link.name_english %></h1>
+	<% for listing in @listings -%>
+	<div class="item">
+		
+		<% if listing.web_address -%>		
+	    <div class="left"><%= link_to image_tag(listing.main_photo), listing.web_address.ensure_url %></div>
+			<div class="right">
+    		<p class="title"><%= link_to listing.name, listing.web_address.ensure_url %><p>
+		<% else -%>
+		  <div class="left"><%= image_tag listing.main_photo %></div>
+			<div class="right">
+    	  <p class="title"><%= listing.name %><p>
+		<% end -%>
+		
+    <% if listing.display?('full_address') %><p><span class="label"><%= t(:Address) %> :</span> <%= listing.full_address %></p><% end %>
+    <% if listing.display?('contact_info')%><p><span class="label"><%= t(:Contact_Info) %> :</span> <%= listing.contact_info %></p><% end %>
+   	<% if listing.web_address -%>
+			<p><span class="label"><%= t(:Web_address) %> : </span><%= link_to listing.web_address, listing.web_address.ensure_url %></p>
+		<% end -%>
+		<p class="desc">
+			<span class="detail"><% if listing.display?('description')%><%= listing.description %><% end %></span>
+		</p>	
+		<div class="couponImage">
+			<%= render :partial => 'listing_coupon', :locals => {:listing => listing} %>
+		</div>	
+
+			</div>
+					
+	</div>
+  <% end %>	
+
+<% end %>	
+</div>

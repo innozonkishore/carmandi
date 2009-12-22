@@ -1,0 +1,21 @@
+<div class="navigation">
+  <ul>
+    <li id="new_car">
+       <span><%= link_to t(:New_Cars), new_cars_path, :class => :frist %></span>
+    </li>
+    <li id="used_car">
+      <span><%= link_to t(:Used_Cars), used_car_vehicles_path %></span>
+    </li>
+    <li id="clearance_center">
+      <span><%= link_to t(:Clearance_center), clearance_center_vehicles_path %></span>
+    </li>
+    <li id="private_sales">
+     <span> <%= link_to t(:Private_Sales), search_private_vehicles_path %></span>
+    </li>
+    <li id="sell_your_car">
+	  <span><%= link_to t(:Sell_your_Car), sell_your_car_path if !logged_in? || current_user.is_private_seller? %></span>
+    </li>
+
+    
+  </ul>
+</div>

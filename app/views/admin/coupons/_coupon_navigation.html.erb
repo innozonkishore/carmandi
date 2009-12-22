@@ -1,0 +1,12 @@
+<div class="actions">
+	<%=link_to t(:create_new), new_admin_coupon_path, :class => 'new action' %>
+</div>
+<div class="coup_nav">
+	<%= link_to t(:View_all_coupons), admin_coupons_path %>
+</div>
+<div class="coup_nav">
+	<%= link_to t(:View_coupons_by_dealer), show_by_dealer_admin_coupons_path %>
+</div>
+<div class="coup_nav">
+	<%= link_to t(:View_coupons_for_listing), show_for_listing_admin_coupons_path %>
+</div>

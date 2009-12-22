@@ -1,0 +1,57 @@
+<h2><%= t(:Specifications) %></h2>
+<p class="even">
+	<span class="label"><%= t(:Body_Style) %></span>
+	<span id="body_style1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Body Style'}.compact.first %></span>
+</p>
+<p>
+	<span class="label"><%= t(:Engine_Type) %></span>
+	<span id="engine_type1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Engine Type'}.compact.first %></span>
+</p>
+<p class="even">
+	<span class="label"><%= t(:Transmission) %></span>
+	<span id="transmission1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Transmission-long'}.compact.first %></span>
+</p>
+<p>
+	<span class="label"><%= t(:Driveline) %></span>
+	<span id="driveline1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Driveline'}.compact.first %></span>
+</p>
+<p class="even">
+	<span class="label"><%= t(:tank_gallon) %></span>
+	<span id="tank1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Tank'}.compact.first %></span>
+</p>
+<p>
+	<span class="label"><%= t(:economy_city) %></span>
+	<span id="city_economy1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Fuel Economy-city'}.compact.first %></span>
+</p>
+<p class="even">
+	<span class="label"><%= t(:economy_highway) %></span>
+	<span id="highway_economy1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Fuel Economy-highway'}.compact.first %></span>
+</p>
+<p>
+	<span class="label"><%= t(:Anti_Brake_System) %></span>
+	<span id="braking1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Anti-Brake System'}.compact.first %></span>
+</p>
+<p class="even">
+	<span class="label"><%= t(:Steering_Type) %></span>
+	<span id="steering_type1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Steering Type'}.compact.first %></span>
+</p>
+<p>
+	<span class="label"><%= t(:seating_standard) %></span>
+	<span id="seating1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Standard Seating'}.compact.first %></span>
+</p>
+<!-- <p class="even">
+	<span class="label">Seating (optional)</span>
+	<span id="optional_seating1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Optional Seating'}.compact.first %></span>
+</p> -->
+<p class="even">
+	<span class="label"><%= t(:Length_in) %></span>
+	<span id="length1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Overall Length'}.compact.first %></span>
+</p>
+<p>
+	<span class="label"><%= t(:Width_in) %></span>
+	<span id="width1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Overall Width'}.compact.first %></span>
+</p>
+<p class="even">
+	<span class="label"><%= t(:Height_in) %></span>
+	<span id="height1"><%= data['VIN'].first['Vehicle'].first['Item'].collect{|x| x['Value'] if x['Key'] == 'Overall Height'}.compact.first %></span>
+</p>

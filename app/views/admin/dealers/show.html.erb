@@ -1,0 +1,20 @@
+<div class="showDetail">    
+    <%= image_tag @dealer.dealer_logo.public_filename(:thumb), :align => :absmiddle if @dealer.dealer_logo %> <br />
+    <div><span class="label"><%= t(:Dealership_name) %>:</span> <%= @dealer.dealership_name %> </div>
+    <div><span class="label"><%= t(:City) %>:</span> <%= @dealer.city %> </div>
+    <div><span class="label"><%= t(:Province) %>:</span> <%= @dealer.province %></div>
+    <div><span class="label"><%= t(:Address) %>:</span> <%= @dealer.address %> </div>
+    <div><span class="label"><%= t(:Website_url) %>:</span> <%= @dealer.website_url %></div>
+    <br /><br />
+    
+    <h2><%= t(:contact_person_details) %>:</h2>
+    <div><span class="label"><%= t(:First_Name) %>:</span> <%= @user.firstname %></div>
+    <div><span class="label"><%= t(:Last_Name) %>:</span> <%= @user.lastname %> </div>
+    <div><span class="label"><%= t(:Email) %>: </span><%= @user.email %> </div>
+    <div><span class="label"><%= t(:Username) %>:</span> <%= @user.username %> </div>
+    <div><span class="label"><%= t(:Address) %>: </span><%= @user.try(:address) %> </div>
+    <div><span class="label"><%= t(:Phone_Number) %>: </span><%= @user.phone_number %> </div>
+    <div><span class="label"><%= t(:fax_number) %>: </span><%= @user.fax_number %> </div>
+    <div><span class="label"><%= t(:Role) %>:</span> <%= @user.role.name %> </div>
+    <div><span class="label"><%= t(:Active) %>:</span> <%= @user.active %> </div>
+</div>

@@ -1,0 +1,11 @@
+<a id='disclaimer' onmouseover="change_cursor();" onmouseout="change_cursor_again();" onclick='show_disclaimer();'><%= t(:View_Disclaimer) %></a>
+<div class="disclaimer" style="display: none;" id="vehicle_disclaimer">
+	<h1><%= t(:Inventory_Disclaimer) %></h1>
+	<div class="close"><a onclick="hide_disclaimer();" onmouseover="change_cursor();" onmouseout="change_cursor_again();">close</a></div>
+	<h2><%= t(:We_make_no_representations) %></h2>
+	<ol>
+		<li><%= t(:any_vehicle_listed_on_this_site) %> </li>
+		<li><%= t(:site_accuracy_connected) %></li>
+	</ol>
+	<p><%= t(:disclaimer_content) %></p>
+</div>
